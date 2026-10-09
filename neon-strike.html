@@ -336,7 +336,7 @@ function drawTitle(){
   ctx.shadowBlur=0;ctx.font='13px monospace';ctx.fillStyle='#a090ff';ctx.fillText(' ARCADE BULLET HELL ',W/2,y+100);
   if((frame>>5)%2===0){ctx.font='bold 20px monospace';ctx.fillStyle='#ffffff';ctx.shadowBlur=12;ctx.shadowColor='#ffffff';ctx.fillText('PRESS SPACE / TAP',W/2,450);}
   ctx.shadowBlur=0;ctx.font='13px "Hiragino Kaku Gothic ProN",Meiryo,sans-serif';ctx.fillStyle='#c8c0ff';
-  [' / WASD','SHIFT','XPBGMM',' / 2','','','CHAINx5'].forEach((s,i)=>ctx.fillText(s,W/2,510+i*22));
+  ['矢印 / WASD 移動','SHIFT 低速移動','X ボム','P / Esc 一時停止','M 音楽　Enter 再挑戦','スマホ：なぞって移動・自動発射','CHAIN x5 でスコア倍率UP'].forEach((s,i)=>ctx.fillText(s,W/2,510+i*22));
   ctx.font='bold 14px monospace';ctx.fillStyle='#ffd23b';ctx.fillText('HI-SCORE '+hi,W/2,690);ctx.restore();}
 function drawOver(){ctx.fillStyle='rgba(5,0,15,'+Math.min(0.7,overT/60)+')';ctx.fillRect(0,0,W,H);ctx.save();ctx.textAlign='center';
   ctx.font='bold 52px "Arial Black",Impact,sans-serif';ctx.shadowBlur=25;ctx.shadowColor='#ff3030';ctx.fillStyle='#ffd0d0';ctx.fillText('GAME OVER',W/2,280);
