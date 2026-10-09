@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>おまかせバランス｜AI PLAY 第2弾（非公認ファンメディア）</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Zen Kaku Gothic New",sans-serif;background:#F4F5F7;color:#1A1D23;min-height:100vh;display:flex;justify-content:center;padding:16px 12px 40px}
+.app{width:100%;max-width:480px}
+.card{background:#fff;border:1px solid #e3e5ea;border-radius:18px;padding:22px 20px;margin-bottom:14px}
+.badge{display:inline-block;background:#4C4AE4;color:#fff;font-size:12px;font-weight:900;padding:4px 14px;border-radius:999px;letter-spacing:2px}
+h1{font-size:26px;font-weight:900;line-height:1.4;margin-top:10px}
+h1 .em{color:#4C4AE4}
+.lead{font-size:13.5px;color:#5B6172;margin-top:8px;line-height:1.75;font-weight:500}
+.howto{background:#f4f4fb;border-radius:14px;padding:14px 16px;margin-top:14px}
+.howto .tt{font-size:12px;font-weight:900;color:#4C4AE4;letter-spacing:2px;margin-bottom:8px}
+.howto p{font-size:13.5px;color:#1A1D23;font-weight:700;line-height:1.8}
+.howto small{color:#5B6172;font-weight:500}
+.hud{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.hud .box{background:#101318;border-radius:12px;padding:10px 8px;text-align:center}
+.hud .v{color:#F5A623;font-size:19px;font-weight:900;line-height:1.2}
+.hud .k{color:rgba(255,255,255,.6);font-size:10.5px;font-weight:700;margin-top:2px}
+.week{font-size:12px;font-weight:900;color:#F5A623;letter-spacing:2px;margin-bottom:8px}
+.tcard{background:#fff}
+.tname{font-size:18px;font-weight:900;line-height:1.5}
+.tdesc{font-size:12.5px;color:#5B6172;line-height:1.7;margin-top:6px;font-weight:500}
+.choices{display:grid;gap:10px;margin-top:14px}
+.ch{font-family:inherit;text-align:left;border:2px solid #d8dade;background:#fff;border-radius:12px;padding:13px 14px;cursor:pointer}
+.ch b{font-size:15px;display:block}
+.ch small{display:block;font-size:12px;color:#5B6172;font-weight:700;margin-top:4px;line-height:1.6}
+.ch:active{transform:scale(.98)}
+.ch:disabled{opacity:.4;cursor:not-allowed}
+.ch.ai{border-color:#4C4AE4}.ch.ai b{color:#4C4AE4}
+.ch.self{border-color:#F5A623}.ch.self b{color:#8a5d00}
+.fb{font-size:13.5px;font-weight:900;margin-top:12px;line-height:1.7;min-height:20px}
+.fb.good{color:#0e8a6d}.fb.warn{color:#8a5d00}.fb.bad{color:#E8503A}
+.meter{margin-top:10px}
+.meter .row{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:900;color:#5B6172;margin-top:6px}
+.meter .bar{flex:1;height:9px;background:#eceef1;border-radius:5px;overflow:hidden}
+.meter .bar i{display:block;height:100%;border-radius:5px;transition:width .3s}
+.skip{background:none;border:none;color:#8a8f9c;font-size:12px;font-weight:700;font-family:inherit;text-decoration:underline;margin-top:10px;cursor:pointer}
+.btn{display:block;width:100%;border:none;background:#4C4AE4;color:#fff;font-family:inherit;font-size:15.5px;font-weight:900;padding:14px;border-radius:12px;cursor:pointer;margin-top:12px}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#fff;color:#4C4AE4;border:2px solid #4C4AE4}
+.big{font-size:30px;font-weight:900;text-align:center;margin:12px 0}
+.rip{display:grid;gap:8px;margin:14px 0}
+.rip .r{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:900;color:#5B6172}
+.rip .bar{flex:1;height:10px;background:#eceef1;border-radius:5px;overflow:hidden}
+.rip .bar i{display:block;height:100%;border-radius:5px}
+.verdict{background:#f4f4fb;border-radius:12px;padding:14px;font-size:13px;font-weight:700;color:#1A1D23;line-height:1.8}
+.lesson{background:#fdeebc;color:#8a5d00;border-radius:12px;padding:12px 14px;font-size:12.5px;font-weight:900;line-height:1.8;margin-top:10px}
+.links{display:grid;gap:10px;margin-top:14px}
+.links a{display:block;text-align:center;text-decoration:none;font-weight:900;font-size:13.5px;padding:13px;border-radius:12px}
+.links a.n{background:#4C4AE4;color:#fff}
+.links a.f{background:#fff;color:#1A1D23;border:2px solid #1A1D23}
+.ftr{font-size:11px;color:#8a8f9c;text-align:center;line-height:1.9;margin-top:8px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TITLE -->
+  <div class="card" id="sc-title">
+    <span class="badge">AI PLAY・第2弾</span>
+    <h1>おまかせバランス<br><span class="em">それ、AIに任せて大丈夫？</span></h1>
+    <p class="lead">店主のあなたのもとに、1か月ぶんの仕事が10個、降ってきます。<br>全部AIに丸投げ？　全部自分？　——<b>クレジット・時間・面白さの3本のゲージ</b>を、切らさないように回してください。</p>
+    <div class="howto">
+      <div class="tt">あそびかた（約2分・10仕事）</div>
+      <p>💰 <b>クレジット</b>：AIに使える月の予算（有料プランは月10,000が目安）<br>
+      ⏰ <b>時間</b>：あなたの空き時間。AIに任せれば減らない<br>
+      🎭 <b>面白さ</b>：作ったものの面白さ。クリエイティブな仕事を丸投げすると<b>下がる</b></p>
+      <small>仕事ごとに「AIに任せる／自分でやる」を選ぶだけ。切らしたゲージが、月末の評価になります。</small>
+    </div>
+    <button class="btn" onclick="start()">▶ 10月、はじめる</button>
+    <p class="ftr">Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+  </div>
+
+  <!-- GAME -->
+  <div class="card hide" id="sc-game">
+    <div class="hud">
+      <div class="box"><div class="v" id="v-cr">10,000</div><div class="k">クレジット</div></div>
+      <div class="box"><div class="v" id="v-t">24h</div><div class="k">時間</div></div>
+      <div class="box"><div class="v" id="v-f">50</div><div class="k">面白さ</div></div>
+    </div>
+    <div class="week" id="week"></div>
+    <div class="tname" id="t-name"></div>
+    <div class="tdesc" id="t-desc"></div>
+    <div class="choices" id="choices"></div>
+    <div class="fb" id="fb"></div>
+    <button class="btn hide" id="btn-next" onclick="next()">つぎの仕事へ →</button>
+    <button class="skip hide" id="btn-skip" onclick="skipTask()">この仕事は見送る</button>
+  </div>
+
+  <!-- END -->
+  <div class="card hide" id="sc-end">
+    <div class="week">10月31日・月のまとめ</div>
+    <div class="big" id="end-title"></div>
+    <div class="rip">
+      <div class="r">クレジット <div class="bar"><i id="b-cr" style="background:#4C4AE4"></i></div></div>
+      <div class="r">時間 <div class="bar"><i id="b-t" style="background:#0e8a6d"></i></div></div>
+      <div class="r">面白さ <div class="bar"><i id="b-f" style="background:#F5A623"></i></div></div>
+    </div>
+    <div class="verdict" id="verdict"></div>
+    <div class="lesson" id="lesson"></div>
+    <div class="links">
+      <a class="n" href="https://note.com/makaseru_ai50/n/n5aac3713df5b" target="_blank" rel="noopener">この失敗談、実際に起きた話は note で →</a>
+      <a class="f" href="https://gp20190917-beep.github.io/makaseru-ai-life/" target="_blank" rel="noopener">AIに頼んで作りました｜まかせるAI生活 →</a>
+    </div>
+    <button class="btn ghost" onclick="location.reload()">もういちど遊ぶ</button>
+    <p class="ftr">このゲームは、AI（Genspark）に頼んで作りました。数字はゲーム用のもので、実際の料金と一致する保証はありません。<br>Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+  </div>
+
+</div>
+<script>
+var CR_MAX=10000, T_MAX=24, F_MAX=100;
+var TASKS=[
+ {n:"① 朝のメール仕分けと下書き", d:"毎日のルーチン。返信のたたき台づくり。",
+  ai:{cr:0,t:0.5,f:0,note:"AIに任せる（コアモデルはクレジット不要）／時間0.5h"},
+  self:{cr:0,t:2,f:0,note:"自分でやる（時間2h）"},
+  aiFb:"コアモデルはクレジットを使わない。この使い方、実はタダ。", selfFb:"2時間使った。正確だけど、朝が終わった。"},
+ {n:"② 明日の仕入れの調べもの", d:"市場価格の確認と、仕入れ先の候補集め。",
+  ai:{cr:0,t:0.5,f:0,note:"AIに任せる（出典つきで）／時間0.5h"},
+  self:{cr:0,t:2,f:0,note:"自分でやる（時間2h）"},
+  aiFb:"出典つきで一発。予算ゼロで、時間だけが残る。", selfFb:"2時間。悪くないけど、この時間で仕入れ値を1個眺め続けた。"},
+ {n:"③ 会議用スライド8枚", d:"来月の営業会議。数字の資料をゼロから作る。",
+  ai:{cr:0,t:1,f:0,note:"AIに任せる（スライド生成）／時間1h"},
+  self:{cr:0,t:6,f:-5,note:"自分でやる（時間6h）"},
+  aiFb:"出てきたものを直すだけ。スライド作成はコアモデルでクレジット不要。", selfFb:"6時間溶けて、レイアウトと格闘した。面白さも少し減った。"},
+ {n:"④ リールの構成と概要欄", d:"毎月のInstagram投稿。構成を考えるのがいちばん時間を食う。",
+  ai:{cr:0,t:0.5,f:0,note:"AIに任せる／時間0.5h"},
+  self:{cr:0,t:3,f:-5,note:"自分でやる（時間3h）"},
+  aiFb:"構成と概要欄、30分の悩みが0.5時間になった。", selfFb:"3時間悩んで、概要欄を書き直した。悩みは減らない。"},
+ {n:"⑤ 売上エクセル3年分の分析", d:"商品ごとの「売れる月」を出す。自分では一生やらない作業。",
+  ai:{cr:300,t:0.5,f:5,note:"AIに任せる（クレジット300）／時間0.5h"},
+  self:{cr:0,t:6,f:0,note:"自分でやる（時間6h・たぶんやらない）"},
+  aiFb:"300クレジットで、3年分が見えた。ここの使途は、間違いじゃない。", selfFb:"6時間かけたが、途中で挫折。手作業でやる話ではなかった。"},
+ {n:"⑥ 秋季セールの告知画像4案", d:"店頭とSNS用。4パターン、あると選びやすい。",
+  ai:{cr:0,t:0.5,f:0,note:"AIに任せる（コア画像はクレジット不要）／時間0.5h"},
+  self:{cr:0,t:3,f:0,note:"自分でやる（時間3h）"},
+  aiFb:"4案を5分で。画像もコアモデルならクレジット不要。", selfFb:"3時間で2案。妥協案が並んだ。"},
+ {n:"⑦ リール動画の撮影と編集", d:"あなたの得意分野。店の顔を作る仕事。",
+  ai:{cr:760,t:0.5,f:-15,note:"AIに丸投げ（動画生成・クレジット760）／時間0.5h"},
+  self:{cr:0,t:3,f:10,note:"自分でやる（撮影・編集）／時間3h"},
+  aiFb:"760クレジット……。動きはそれらしい。でも、これはあなたの顔なんだ。", selfFb:"3時間かけた甲斐がありました。面白さメーターが回復した。"},
+ {n:"⑧ 店のテーマ曲をつくる", d:"好きでやっている仕事。SUNOで曲を作るのが楽しい。",
+  ai:{cr:2500,t:0.5,f:-20,note:"AIに丸投げ（曲と動画ごと）／クレジット2,500"},
+  self:{cr:0,t:2,f:15,note:"自分（作詞はAI・曲と編集は自分）／時間2h"},
+  aiFb:"2,500消えて、曲は「なんかぼんやり」。好きな仕事の丸投げは、だいたいこうなる。", selfFb:"AIに調査だけ任せて、曲と編集は自分。これが分業。面白さが跳ねた。"},
+ {n:"⑨ 問い合わせフォームづくり", d:"店のサイトに置く。コードを書くのは苦手。",
+  ai:{cr:500,t:1,f:0,note:"AIに任せる（クレジット500）／時間1h"},
+  self:{cr:0,t:8,f:-10,note:"自分でやる（時間8h・徹夜コース）"},
+  aiFb:"コードはAIの領分。500クレジットで、夜を確保した。", selfFb:"8時間。テンプレをいじり続けて、深夜になった。面白くはない。"},
+ {n:"⑩ 月末の売上まとめ", d:"締めの作業。来月の方針を決める材料。",
+  ai:{cr:0,t:0.5,f:0,note:"AIに任せる／時間0.5h"},
+  self:{cr:0,t:2,f:0,note:"自分でやる（時間2h）"},
+  aiFb:"集計は5分。あなたは方針を決めるだけ。", selfFb:"2時間。方針を考える前に、月が終わった。"}
+];
+var cr=CR_MAX, t=T_MAX, f=50, done=0, i=0, skip=0;
+function $(id){return document.getElementById(id)}
+function start(){ $("sc-title").classList.add("hide"); $("sc-game").classList.remove("hide"); render(); }
+function hud(){ $("v-cr").textContent = cr.toLocaleString(); $("v-t").textContent = t + "h"; $("v-f").textContent = f; }
+function render(){
+  var T = TASKS[i];
+  $("week").textContent = "仕事 " + (i+1) + "／10";
+  $("t-name").textContent = T.n; $("t-desc").textContent = T.d;
+  $("fb").textContent = ""; $("fb").className="fb";
+  $("btn-next").classList.add("hide");
+  var area=$("choices"); area.innerHTML="";
+  var b1=document.createElement("button"); b1.className="ch ai";
+  b1.innerHTML="<b>🤖 " + T.ai.note + "</b>";
+  if(T.ai.cr>cr){ b1.disabled=true; b1.innerHTML += "<small>クレジットが足りません</small>"; }
+  else if(T.ai.t>t){ b1.disabled=true; b1.innerHTML += "<small>時間が足りません</small>"; }
+  b1.onclick=function(){ pick("ai"); };
+  var b2=document.createElement("button"); b2.className="ch self";
+  b2.innerHTML="<b>🙋 " + T.self.note + "</b>";
+  if(T.self.t>t){ b2.disabled=true; b2.innerHTML += "<small>時間が足りません</small>"; }
+  b2.onclick=function(){ pick("self"); };
+  area.appendChild(b1); area.appendChild(b2);
+  $("btn-skip").classList.toggle("hide", !(b1.disabled && b2.disabled));
+}
+function pick(side){
+  var T=TASKS[i], o=T[side];
+  cr=Math.max(0,cr-o.cr); t=Math.max(0,t-o.t);
+  f=Math.max(0,Math.min(100,f+o.f)); done++;
+  var fb=$("fb");
+  if(side==="ai"){
+    fb.className="fb " + (o.f<0 ? "bad" : "good");
+    fb.textContent = "🤖 " + T.aiFb;
+  } else {
+    fb.className="fb " + (o.f>0 ? "good" : (o.f<0 ? "warn" : "good"));
+    fb.textContent = "🙋 " + T.selfFb;
+  }
+  hud(); $("choices").innerHTML=""; $("btn-skip").classList.add("hide");
+  $("btn-next").classList.remove("hide");
+  $("btn-next").textContent = (i===9) ? "月末のまとめを見る →" : "つぎの仕事へ →";
+}
+function skipTask(){ skip++; done++; var fb=$("fb"); fb.className="fb warn"; fb.textContent="→ この仕事は見送りました。店はまわりますが、仕事は積み残し。"; $("choices").innerHTML=""; $("btn-skip").classList.add("hide"); $("btn-next").classList.remove("hide"); hud(); }
+function next(){ i++; if(i>=TASKS.length){ end(); } else { render(); } }
+function end(){
+  $("sc-game").classList.add("hide"); $("sc-end").classList.remove("hide");
+  var title, v, l;
+  if(cr<=0){ title="💸 クレジット、0で凍結"; v="月中に予算が尽きました。動画生成など、重い仕事が原因のことが多い。毎日100クレジットが続く無料とは違い、有料は「月10,000」の世界です。"; l="教訓：コアモデルのチャット・スライド・画像はクレジット不要。使うのは分析と動画生成など「重い処理」。そこに予算を注ぐ。"; }
+  else if(f<=20){ title="🎭 面白さが枯れた月"; v="仕事はまわりましたが、面白さメーターがほぼ0。好きでやる仕事まで丸投げすると、こうなります。"; l="教訓：「面白い」のセンサーは、自分の中にあります。作詞はAI・編集は自分——分業が正解の仕事もある。"; }
+  else if(done>=9 && f>=60 && cr>=3000){ title="🎓 職人バランス"; v="仕事10中"+done+"件、クレジット残"+cr.toLocaleString()+"、面白さも十分。任せるところと任さないところ、線が引けています。"; l="教訓：ルーチンは丸ごと。重い処理は予算を決めて。好きな仕事は自分で——この線引きが、AIと長く付き合うコツ。"; }
+  else if(done>=7){ title="✅ いい月"; v="仕事は"+done+"件まわり、クレジットは"+cr.toLocaleString()+"残りました。面白さは"+f+"。悪くないバランスです。"; l="教訓：完璧な線引きは一度では決まりません。月末に振り返って、来月の「任せる/任さない」を1つだけ見直せば十分。"; }
+  else { title="🐢 まわらなかった月"; v="仕事は"+done+"件。見送り"+skip+"件。時間も予算も残ったのに、店が回らなかった。"; l="教訓：節約しすぎても店はまわりません。クレジットは「使うためにある」予算です。"; }
+  $("end-title").textContent = title;
+  $("verdict").textContent = v;
+  $("lesson").textContent = l;
+  $("b-cr").style.width = Math.round(cr/CR_MAX*100)+"%";
+  $("b-t").style.width = Math.round(t/T_MAX*100)+"%";
+  $("b-f").style.width = Math.round(f/F_MAX*100)+"%";
+}
+</script>
+</body>
+</html>
