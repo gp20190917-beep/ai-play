@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>ぶん投げ店長｜AI PLAY 第3弾（非公認ファンメディア）</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:"Zen Kaku Gothic New",sans-serif;background:#F4F5F7;color:#1A1D23;min-height:100vh;display:flex;justify-content:center;padding:14px 10px 36px}
+.app{width:100%;max-width:480px}
+.card{background:#fff;border:1px solid #e3e5ea;border-radius:18px;padding:22px 20px;margin-bottom:14px}
+.badge{display:inline-block;background:#E8503A;color:#fff;font-size:12px;font-weight:900;padding:4px 14px;border-radius:999px;letter-spacing:2px}
+h1{font-size:27px;font-weight:900;line-height:1.4;margin-top:10px}
+h1 .em{color:#4C4AE4}
+.lead{font-size:13.5px;color:#5B6172;margin-top:8px;line-height:1.75;font-weight:500}
+.types{display:grid;gap:10px;margin-top:14px}
+.type{display:flex;align-items:center;gap:12px;border-radius:12px;padding:12px 14px;font-size:13.5px;font-weight:700;line-height:1.6}
+.type .sw{flex-shrink:0;color:#fff;font-weight:900;font-size:13px;padding:7px 12px;border-radius:999px}
+.type.r{background:#eeeefd}.type.r .sw{background:#4C4AE4}
+.type.f{background:#fdf3e0}.type.f .sw{background:#F5A623;color:#14161c}
+.type.h{background:#fdeeec}.type.h .sw{background:#E8503A}
+.type b{display:block;font-size:14px}
+.rule{background:#101318;color:#fff;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:12.5px;font-weight:700;line-height:1.8}
+.rule b{color:#F5A623}
+.btn{display:block;width:100%;border:none;background:#4C4AE4;color:#fff;font-family:inherit;font-size:16px;font-weight:900;padding:15px;border-radius:12px;cursor:pointer;margin-top:14px;touch-action:manipulation}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#fff;color:#4C4AE4;border:2px solid #4C4AE4}
+.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.hud .box{background:#101318;border-radius:12px;padding:8px 4px;text-align:center}
+.hud .v{color:#F5A623;font-size:16px;font-weight:900;line-height:1.2}
+.hud .k{color:rgba(255,255,255,.6);font-size:10px;font-weight:700;margin-top:2px}
+#cv{display:block;width:100%;height:min(62vh,580px);min-height:440px;border-radius:18px;background:#101318;touch-action:none;user-select:none}
+.ctrl{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.ctrl button{font-family:inherit;font-size:16px;font-weight:900;border:none;border-radius:14px;padding:17px 6px;cursor:pointer;touch-action:manipulation}
+.ctrl button:active{transform:scale(.96)}
+#bL{background:#4C4AE4;color:#fff}
+#bR{background:#F5A623;color:#14161c}
+.tip{font-size:11.5px;color:#5B6172;font-weight:700;text-align:center;margin-top:8px;line-height:1.7}
+.big{font-size:28px;font-weight:900;text-align:center;margin:10px 0 6px;line-height:1.4}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.stats div{background:#f4f4fb;border-radius:12px;padding:10px 4px;text-align:center}
+.stats b{display:block;font-size:20px;color:#4C4AE4}
+.stats span{font-size:11px;color:#5B6172;font-weight:700}
+.lesson{background:#fdeebc;color:#8a5d00;border-radius:12px;padding:12px 14px;font-size:13px;font-weight:900;line-height:1.8}
+.bestline{font-size:12px;color:#5B6172;text-align:center;font-weight:700;margin-top:10px}
+.links{display:grid;gap:10px;margin-top:14px}
+.links a{display:block;text-align:center;text-decoration:none;font-weight:900;font-size:13.5px;padding:13px;border-radius:12px}
+.links a.n{background:#4C4AE4;color:#fff}
+.links a.f{background:#fff;color:#1A1D23;border:2px solid #1A1D23}
+.ftr{font-size:11px;color:#8a8f9c;text-align:center;line-height:1.9;margin-top:10px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TITLE -->
+  <div class="card" id="sc-title">
+    <span class="badge">AI PLAY・第3弾　動くゲーム</span>
+    <h1>ぶん投げ店長<br><span class="em">AIに投げるか、自分で受けるか</span></h1>
+    <p class="lead">店に仕事が次々と<b>落ちてきます</b>。落ちきる前に、<b>左（AI）か右（自分）に投げ分けて</b>ください。1か月（30日）店を回せたらクリアです。</p>
+    <div class="types">
+      <div class="type r"><span class="sw">🔁 青</span><div><b>いつもの仕事 → 左（AI）へ</b>メール・集計・スライドなど。AIに任せると時間が戻る</div></div>
+      <div class="type f"><span class="sw">🎨 黄</span><div><b>好きな仕事 → 右（自分）へ</b>曲づくり・撮影・編集など。自分でやると面白さが上がる</div></div>
+      <div class="type h"><span class="sw">💸 赤</span><div><b>全部おまかせ動画 → 触らない</b>下まで落として見送る。投げると2,500クレジットが消える</div></div>
+    </div>
+    <div class="rule">投げ方：<b>画面の左半分か右半分をタップ</b>（下のボタンでもOK・PCは←→キー）<br>いちばん下に来ている仕事が飛んでいきます。<br>💰クレジット・⏰時間・🎭面白さ、<b>どれか1つでも0になったら閉店</b>です。</div>
+    <button class="btn" id="btn-start">▶ 開店する</button>
+    <p class="ftr">約1〜3分｜Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+  </div>
+
+  <!-- PLAY -->
+  <div class="hide" id="sc-play">
+    <div class="hud">
+      <div class="box"><div class="v" id="h-cr">10,000</div><div class="k">💰クレジット</div></div>
+      <div class="box"><div class="v" id="h-tm">24h</div><div class="k">⏰時間</div></div>
+      <div class="box"><div class="v" id="h-fun">50</div><div class="k">🎭面白さ</div></div>
+      <div class="box"><div class="v" id="h-day">1日目</div><div class="k">📅30日でクリア</div></div>
+    </div>
+    <canvas id="cv"></canvas>
+    <div class="ctrl"><button id="bL">◀ AIに任せる</button><button id="bR">自分でやる ▶</button></div>
+    <p class="tip">🔁青は左（AI）／🎨黄は右（自分）／💸赤は触らない</p>
+  </div>
+
+  <!-- OVER -->
+  <div class="card hide" id="sc-over">
+    <span class="badge" id="ov-badge">閉店</span>
+    <div class="big" id="ov-title"></div>
+    <div class="stats">
+      <div><b id="s-day">0</b><span>店を回せた日数</span></div>
+      <div><b id="s-ok">0</b><span>正しく投げた数</span></div>
+      <div><b id="s-combo">0</b><span>最高連続</span></div>
+    </div>
+    <div class="lesson" id="ov-lesson"></div>
+    <p class="bestline" id="ov-best"></p>
+    <button class="btn" id="btn-retry">もういちど開店する</button>
+    <div class="links">
+      <a class="n" href="https://note.com/makaseru_ai50/n/n5aac3713df5b" target="_blank" rel="noopener">💸 赤い仕事の元ネタ（実話）は note で →</a>
+      <a class="f" href="index.html">ほかのゲームで遊ぶ →</a>
+      <a class="f" href="https://gp20190917-beep.github.io/makaseru-ai-life/" target="_blank" rel="noopener">AIに頼んで作りました｜まかせるAI生活 →</a>
+    </div>
+    <p class="ftr">このゲームは、AI（Genspark）に頼んで作りました。数字はゲーム用で、実際の料金とは一致しません。<br>Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+  </div>
+
+</div>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+var cv=$("cv"), ctx=cv.getContext("2d");
+var W=360,H=560,DPR=1;
+var FONT='"Zen Kaku Gothic New",sans-serif';
+var TYPES={
+  routine:{color:"#4C4AE4",text:"#fff",icon:"🔁",words:["メール仕分け","売上の集計","仕入れの調べもの","会議スライド","議事録","告知画像","月末まとめ","問い合わせ返信"],hint:"← 左（AI）へ投げる"},
+  fun:{color:"#F5A623",text:"#14161c",icon:"🎨",words:["店のテーマ曲","リール撮影","動画の編集","歌詞のツッコミ","看板の手書き","新メニュー試作"],hint:"右（自分）へ投げる →"},
+  heavy:{color:"#E8503A",text:"#fff",icon:"💸",words:["全部おまかせ動画","丸投げMV","フル自動PV"],hint:"触らない！ 下へ見送る ↓"}
+};
+var state="title",bubbles=[],parts=[],texts=[];
+var cr,tm,fun,day,okCount,combo,best,inDay,spawnT,spawnGap,speed,shake,tutorial,last,demo=false;
+
+function resize(){
+  DPR=Math.min(window.devicePixelRatio||1,2);
+  var r=cv.getBoundingClientRect();
+  W=r.width||360; H=r.height||560;
+  cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+window.addEventListener("resize",function(){ if(state==="play") resize(); });
+
+function hud(){
+  $("h-cr").textContent=Math.max(0,Math.round(cr)).toLocaleString();
+  $("h-tm").textContent=(Math.round(Math.max(0,tm)*10)/10)+"h";
+  $("h-fun").textContent=Math.max(0,Math.round(fun));
+  $("h-day").textContent=Math.min(day,30)+"日目";
+}
+
+function start(isDemo){
+  demo=!!isDemo;
+  $("sc-title").classList.add("hide"); $("sc-over").classList.add("hide"); $("sc-play").classList.remove("hide");
+  resize();
+  cr=10000; tm=24; fun=50; day=1; okCount=0; combo=0; best=0; inDay=0;
+  bubbles=[]; parts=[]; texts=[]; shake=0;
+  spawnGap=2.1; spawnT=0.4; speed=58;
+  tutorial=["routine","fun","heavy"];
+  state="play"; hud();
+  if(demo){
+    tutorial=[]; speed=6;
+    spawn("routine"); bubbles[0].y=H*0.20; bubbles[0].x=W*0.50;
+    spawn("fun"); bubbles[1].y=H*0.40; bubbles[1].x=W*0.46;
+    spawn("heavy"); bubbles[2].y=H*0.60; bubbles[2].x=W*0.54;
+    for(var i=0;i<3;i++){ bubbles[i].vy=6; bubbles[i].hint=TYPES[bubbles[i].type].hint; }
+    spawnT=9999;
+  }
+  last=performance.now(); draw(); requestAnimationFrame(loop);
+}
+
+function spawn(type){
+  if(!type){
+    var r=Math.random();
+    var heavyRate=Math.min(0.24,0.12+day*0.005);
+    type = r<heavyRate ? "heavy" : (r<heavyRate+0.36 ? "fun" : "routine");
+  }
+  var T=TYPES[type];
+  var word=T.words[Math.floor(Math.random()*T.words.length)];
+  var label=T.icon+" "+word;
+  ctx.font="700 15px "+FONT;
+  var w=ctx.measureText(label).width+30;
+  var half=w/2+10;
+  var x=W/2+(Math.random()-0.5)*W*0.22;
+  x=Math.max(half,Math.min(W-half,x));
+  var isTut=tutorial.length>0||demo;
+  bubbles.push({type:type,label:label,w:w,h:42,x:x,y:-28,vy:speed*(isTut?0.55:(0.9+Math.random()*0.25)),st:"fall",hint:null,sc:1});
+  if(isTut && !demo) bubbles[bubbles.length-1].hint=T.hint;
+}
+
+function lowest(){
+  var t=null;
+  for(var i=0;i<bubbles.length;i++){ var b=bubbles[i]; if(b.st==="fall" && b.y>-10 && (!t||b.y>t.y)) t=b; }
+  return t;
+}
+
+function fling(side){
+  if(state!=="play"||demo) return;
+  var b=lowest(); if(!b) return;
+  b.st="fly"; b.t=0; b.sx=b.x; b.sy=b.y; b.side=side;
+  b.tx = side==="ai" ? W*0.19 : W*0.81; b.ty=H-40;
+}
+
+function loop(now){
+  if(state!=="play") return;
+  var dt=Math.min(0.05,(now-last)/1000); last=now;
+  update(dt); draw();
+  requestAnimationFrame(loop);
+}
+
+function update(dt){
+  spawnT-=dt;
+  var falling=0;
+  for(var i=0;i<bubbles.length;i++) if(bubbles[i].st==="fall") falling++;
+  if(tutorial.length){
+    if(falling===0 && spawnT<=0){ spawn(tutorial.shift()); spawnT=0.7; }
+  } else if(spawnT<=0){
+    spawn(); spawnT=spawnGap*(0.8+Math.random()*0.4);
+  }
+  for(var j=0;j<bubbles.length;j++){
+    var b=bubbles[j];
+    if(b.st==="fall"){
+      b.y+=b.vy*dt;
+      if(b.y-b.h/2>H){ b.st="gone"; missed(b); }
+    } else if(b.st==="fly"){
+      b.t+=dt/0.32; var k=Math.min(1,b.t);
+      b.x=b.sx+(b.tx-b.sx)*k;
+      b.y=b.sy+(b.ty-b.sy)*k-Math.sin(k*Math.PI)*70;
+      b.sc=1-0.45*k;
+      if(k>=1){ b.st="gone"; resolve(b); }
+    }
+  }
+  bubbles=bubbles.filter(function(b){return b.st!=="gone";});
+  for(var p=0;p<parts.length;p++){ var q=parts[p]; q.x+=q.vx*dt; q.y+=q.vy*dt; q.vy+=420*dt; q.life-=dt; }
+  parts=parts.filter(function(q){return q.life>0;});
+  for(var s=0;s<texts.length;s++){ texts[s].y-=40*dt; texts[s].life-=dt; }
+  texts=texts.filter(function(t){return t.life>0;});
+  if(shake>0) shake=Math.max(0,shake-dt*2.5);
+}
+
+function burst(x,y,c){ for(var i=0;i<14;i++){ var a=Math.random()*Math.PI*2, v=80+Math.random()*180; parts.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-120,life:0.6+Math.random()*0.3,c:c}); } }
+function pop(x,y,s,c){ texts.push({x:Math.max(70,Math.min(W-70,x)),y:y,s:s,c:c,life:1.1}); }
+function shakeIt(v){ shake=Math.max(shake,v||1); if(navigator.vibrate){ try{navigator.vibrate(60);}catch(e){} } }
+function good(){ okCount++; combo++; if(combo>best) best=combo; if(combo>=5 && combo%5===0) pop(W/2,H*0.36,combo+"連続！","#ffffff"); }
+
+function resolve(b){
+  if(state!=="play") return;
+  var x=b.tx, y=b.ty-26;
+  if(b.type==="heavy"){ cr-=2500; combo=0; shakeIt(1); pop(x,y,"💸 2,500消えた！","#ff7a66"); burst(x,y,"#E8503A"); }
+  else if(b.type==="routine" && b.side==="ai"){ good(); tm=Math.min(24,tm+0.5); pop(x,y,"任せて正解 +0.5h","#a9a8ff"); burst(x,y,"#4C4AE4"); }
+  else if(b.type==="routine"){ combo=0; tm-=2; pop(x,y,"自分で抱えた −2h","#F5A623"); shakeIt(0.4); }
+  else if(b.type==="fun" && b.side==="self"){ good(); fun=Math.min(100,fun+8); pop(x,y,"面白さ +8","#F5A623"); burst(x,y,"#F5A623"); }
+  else { combo=0; fun-=15; cr-=500; pop(x,y,"丸投げ… 面白さ −15","#ff7a66"); shakeIt(0.6); }
+  progress(); check();
+}
+
+function missed(b){
+  if(state!=="play"||demo) return;
+  if(b.type==="heavy"){ good(); pop(b.x,H-80,"見送って正解！","#3ad19f"); burst(b.x,H-60,"#0e8a6d"); }
+  else { combo=0; tm-=1; pop(b.x,H-80,"積み残し −1h","#b8bcc6"); }
+  progress(); check();
+}
+
+function progress(){
+  inDay++;
+  if(inDay>=6){
+    inDay=0; day++; speed+=6; spawnGap=Math.max(0.72,spawnGap*0.91);
+    if(day>30){ hud(); end("win"); return; }
+    pop(W/2,H*0.26,day+"日目","#ffffff");
+  }
+  hud();
+}
+
+function check(){
+  if(state!=="play") return;
+  if(cr<=0) end("cr"); else if(fun<=0) end("fun"); else if(tm<=0) end("tm");
+}
+
+function rr(x,y,w,h,r){
+  ctx.beginPath(); ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h); ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r); ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
+}
+
+function bin(x,y,w,h,c,label){
+  ctx.fillStyle=c; ctx.globalAlpha=0.16; rr(x,y,w,h,14); ctx.fill(); ctx.globalAlpha=1;
+  ctx.strokeStyle=c; ctx.lineWidth=2; rr(x,y,w,h,14); ctx.stroke();
+  ctx.fillStyle="#ffffff"; ctx.font="900 13px "+FONT; ctx.textAlign="center"; ctx.textBaseline="middle";
+  ctx.fillText(label,x+w/2,y+h/2);
+}
+
+function draw(){
+  ctx.save();
+  if(shake>0) ctx.translate((Math.random()-0.5)*14*shake,(Math.random()-0.5)*14*shake);
+  ctx.fillStyle="#101318"; ctx.fillRect(-20,-20,W+40,H+40);
+  ctx.fillStyle="rgba(76,74,228,0.07)"; ctx.fillRect(0,0,W/2,H);
+  ctx.fillStyle="rgba(245,166,35,0.06)"; ctx.fillRect(W/2,0,W/2,H);
+  ctx.strokeStyle="rgba(255,255,255,0.06)"; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(W/2,0); ctx.lineTo(W/2,H-80); ctx.stroke();
+  ctx.textBaseline="middle"; ctx.font="900 12px "+FONT;
+  ctx.textAlign="left"; ctx.fillStyle="rgba(169,168,255,0.85)"; ctx.fillText("◀ ここをタップ＝AI",12,22);
+  ctx.textAlign="right"; ctx.fillStyle="rgba(245,166,35,0.9)"; ctx.fillText("自分＝ここをタップ ▶",W-12,22);
+  var bw=W*0.34;
+  bin(8,H-74,bw,62,"#4C4AE4","🤖 AIに任せる");
+  bin(W-8-bw,H-74,bw,62,"#F5A623","🙋 自分でやる");
+  ctx.setLineDash([6,6]); ctx.strokeStyle="rgba(232,80,58,0.6)"; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(W*0.37,H-8); ctx.lineTo(W*0.63,H-8); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle="rgba(255,122,102,0.9)"; ctx.font="700 11px "+FONT; ctx.textAlign="center";
+  ctx.fillText("↓ 見送り",W/2,H-24);
+  var target=lowest();
+  for(var i=0;i<bubbles.length;i++){
+    var b=bubbles[i], T=TYPES[b.type];
+    ctx.save(); ctx.translate(b.x,b.y); ctx.scale(b.sc,b.sc);
+    if(b===target){ ctx.shadowColor="#ffffff"; ctx.shadowBlur=18; }
+    ctx.fillStyle=T.color; rr(-b.w/2,-b.h/2,b.w,b.h,21); ctx.fill();
+    ctx.shadowBlur=0;
+    if(b===target){ ctx.strokeStyle="#ffffff"; ctx.lineWidth=2.5; rr(-b.w/2,-b.h/2,b.w,b.h,21); ctx.stroke(); }
+    ctx.fillStyle=T.text; ctx.font="700 15px "+FONT; ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.fillText(b.label,0,1);
+    if(b.hint && b.st==="fall"){ ctx.fillStyle="#ffffff"; ctx.font="900 13px "+FONT; ctx.fillText(b.hint,0,-b.h/2-16); }
+    ctx.restore();
+  }
+  for(var p=0;p<parts.length;p++){ var q=parts[p]; ctx.globalAlpha=Math.max(0,q.life/0.9); ctx.fillStyle=q.c; ctx.fillRect(q.x-3,q.y-3,6,6); }
+  ctx.globalAlpha=1;
+  for(var t=0;t<texts.length;t++){ var tx=texts[t]; ctx.globalAlpha=Math.min(1,tx.life*1.4); ctx.fillStyle=tx.c; ctx.font="900 16px "+FONT; ctx.textAlign="center"; ctx.fillText(tx.s,tx.x,tx.y); }
+  ctx.globalAlpha=1;
+  ctx.restore();
+}
+
+function end(cause){
+  state="over";
+  $("sc-play").classList.add("hide"); $("sc-over").classList.remove("hide");
+  var survived=Math.min(30,cause==="win"?30:day-1);
+  var title,lesson,badge="閉店";
+  if(cause==="win"){ badge="クリア"; title="🎓 1か月、回しきった！"; lesson="任せる／自分でやる／手を出さない——3つの線引きができています。これがAIと長く付き合うコツです。"; }
+  else if(cause==="cr"){ title="💸 クレジットが尽きて閉店"; lesson="赤い「全部おまかせ動画」に手を出すと、一気に2,500消えます。重い処理は、予算を決めてから。最初にやることではありません。"; }
+  else if(cause==="fun"){ title="🎭 面白さが枯れて閉店"; lesson="好きな仕事まで丸投げすると、面白さが減っていきます。「面白い」のセンサーは、自分の中にあります。"; }
+  else { title="⏰ 時間が尽きて閉店"; lesson="いつもの仕事まで自分で抱えると、時間がなくなります。ルーチンは丸ごとAIに任せていい。"; }
+  $("ov-badge").textContent=badge; $("ov-title").textContent=title; $("ov-lesson").textContent=lesson;
+  $("s-day").textContent=survived+"日"; $("s-ok").textContent=okCount; $("s-combo").textContent=best;
+  var rec=0; try{ rec=Number(localStorage.getItem("bunnage_best")||0); if(survived>rec){ rec=survived; localStorage.setItem("bunnage_best",String(rec)); } }catch(e){ rec=survived; }
+  $("ov-best").textContent="自己ベスト："+rec+"日";
+  window.scrollTo(0,0);
+}
+
+cv.addEventListener("pointerdown",function(e){ var r=cv.getBoundingClientRect(); fling((e.clientX-r.left)<r.width/2?"ai":"self"); e.preventDefault(); });
+$("bL").addEventListener("pointerdown",function(e){ fling("ai"); e.preventDefault(); });
+$("bR").addEventListener("pointerdown",function(e){ fling("self"); e.preventDefault(); });
+document.addEventListener("keydown",function(e){
+  if(e.key==="ArrowLeft"||e.key==="a"){ fling("ai"); e.preventDefault(); }
+  else if(e.key==="ArrowRight"||e.key==="d"){ fling("self"); e.preventDefault(); }
+});
+function go(isDemo){ var f=function(){ start(isDemo); }; if(document.fonts&&document.fonts.load){ document.fonts.load("700 15px "+FONT).then(f,f); } else f(); }
+$("btn-start").addEventListener("click",function(){ go(false); });
+$("btn-retry").addEventListener("click",function(){ go(false); });
+if(location.search.indexOf("demo")>=0) go(true);
+})();
+</script>
+</body>
+</html>
