@@ -14,15 +14,22 @@ body{font-family:"Zen Kaku Gothic New",sans-serif;background:#F4F5F7;color:#1A1D
 h1{font-size:26px;font-weight:900;line-height:1.4;margin-top:10px}
 h1 .em{color:#4C4AE4}
 .lead{font-size:13.5px;color:#5B6172;margin-top:8px;line-height:1.75;font-weight:500}
+.howto{background:#f4f4fb;border-radius:14px;padding:14px 16px;margin-top:14px}
+.howto .tt{font-size:12px;font-weight:900;color:#4C4AE4;letter-spacing:2px;margin-bottom:8px}
+.howto ol{list-style:none;counter-reset:st}
+.howto li{counter-increment:st;font-size:14px;font-weight:700;line-height:1.7;padding:7px 0 7px 34px;position:relative}
+.howto li::before{content:counter(st);position:absolute;left:0;top:8px;width:24px;height:24px;background:#4C4AE4;color:#fff;border-radius:50%;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.guide{background:#fdeebc;color:#8a5d00;font-size:13px;font-weight:900;border-radius:10px;padding:9px 14px;margin-bottom:12px;line-height:1.6}
 .stage{font-size:12px;font-weight:900;color:#F5A623;letter-spacing:2px;margin-bottom:8px}
 .bubble{background:#f4f4fb;border-left:4px solid #4C4AE4;border-radius:0 12px 12px 0;padding:12px 14px;font-size:15px;font-weight:700;line-height:1.7;margin:10px 0}
 .who{font-size:12px;color:#5B6172;font-weight:900;margin-bottom:2px}
 .note{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;min-height:34px}
 .chip{background:#1A1D23;color:#F7F7F4;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px}
 .chip .n{color:#F5A623;margin-right:6px}
+.count{font-size:12px;color:#5B6172;font-weight:900;margin-top:8px}
 .brain{background:#101318;border-radius:14px;padding:14px 16px}
 .brain .tt{color:#F5A623;font-size:11px;font-weight:900;letter-spacing:2px}
-.brain.off{opacity:.35}
+.brain.off{opacity:.4}
 .brain .offmsg{display:none;color:#fff;font-size:13px;font-weight:900;text-align:center;padding:8px 0}
 .brain.off .offmsg{display:block}
 .brain.off .note{display:none}
@@ -30,6 +37,7 @@ h1 .em{color:#4C4AE4}
 .btn:active{transform:scale(.98)}
 .btn.ghost{background:#fff;color:#4C4AE4;border:2px solid #4C4AE4}
 .btn.save{background:#F5A623;color:#14161c}
+.saved-pop{background:#0e8a6d;color:#fff;font-size:14px;font-weight:900;border-radius:10px;padding:10px 14px;margin-top:10px;text-align:center;animation:pu .3s ease}
 .ans{display:grid;gap:10px;margin-top:14px}
 .ans button{font-family:inherit;font-size:15.5px;font-weight:700;padding:14px;border-radius:12px;border:2px solid #d8dade;background:#fff;color:#1A1D23;cursor:pointer;text-align:left}
 .ans button:active{transform:scale(.98)}
@@ -41,7 +49,9 @@ h1 .em{color:#4C4AE4}
 .meter{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:12px;font-weight:900;color:#5B6172}
 .bar{flex:1;height:10px;background:#eceef1;border-radius:5px;overflow:hidden}
 .bar i{display:block;height:100%;background:#4C4AE4;border-radius:5px;transition:width .3s}
-.event{background:#1A1D23;color:#F5A623;border-radius:14px;padding:16px;font-size:15px;font-weight:900;text-align:center;letter-spacing:1px;animation:pu .4s ease}
+.event{background:#1A1D23;color:#F5A623;border-radius:14px;padding:14px;font-size:14px;font-weight:900;text-align:center;letter-spacing:1px;animation:pu .4s ease;margin-bottom:10px}
+.event small{display:block;color:rgba(255,255,255,.8);font-size:12px;font-weight:700;margin-top:4px;letter-spacing:0}
+.hint{background:#fdeebc;color:#8a5d00;border-radius:10px;padding:10px 14px;font-size:12.5px;font-weight:700;line-height:1.7;margin-bottom:10px}
 @keyframes pu{0%{transform:scale(.94);opacity:0}100%{transform:scale(1);opacity:1}}
 .big{font-size:34px;font-weight:900;text-align:center;margin:14px 0}
 .score{display:flex;justify-content:center;gap:6px;margin:12px 0}
@@ -62,29 +72,38 @@ h1 .em{color:#4C4AE4}
   <div class="card" id="sc-title">
     <span class="badge">AI PLAY・第1弾</span>
     <h1>はじめまして、を<br><span class="em">卒業</span>するゲーム</h1>
-    <p class="lead">あなたは、小さな店のAIアシスタント。<br>常連さんたちの「いつもの」を覚えて、正しく応えるのが仕事です。<br><b>覚えたことは「セカンドブレイン」に保存</b>——でも、チャットが変わると……？</p>
-    <button class="btn" onclick="start()">店に入る</button>
-    <p class="ftr">全8問・約2分｜Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+    <p class="lead">あなたは、小さな店のAIアシスタント。<br>常連さんたちの「いつもの」を覚えて、正しく応えるのが仕事です。</p>
+    <div class="howto">
+      <div class="tt">あそびかた（約2分・全8問）</div>
+      <ol>
+        <li>お客さんが話しかけてくる。<b>話の中に「いつもの」が隠れている</b></li>
+        <li>「🧠 セカンドブレインに保存する」ボタンを押す。<b>覚えたことがパネルに並ぶ</b></li>
+        <li>お客さんが質問してくるので、<b>正しい答えを選ぶ</b></li>
+        <li>途中で<b>「新しいチャット」イベント</b>が起きる。記憶パネルが消える——<b>頭で覚えていたら正解できる</b></li>
+      </ol>
+    </div>
+    <button class="btn" onclick="start()">▶ 店に入る</button>
+    <p class="ftr">Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
   </div>
 
   <!-- ===== PHASE 1: SAVE NOTES ===== -->
   <div class="card hide" id="sc-save">
     <div class="stage">STEP 1｜おぼえる</div>
-    <div id="intro-area">
-      <p class="who" id="iv-who"></p>
-      <div class="bubble" id="iv-bubble"></div>
-    </div>
+    <div class="guide" id="save-guide">お客さんの話を読んで、下のボタンを押してください。</div>
+    <p class="who" id="iv-who"></p>
+    <div class="bubble" id="iv-bubble"></div>
     <div class="brain" id="brain1">
-      <div class="tt">🧠 セカンドブレイン</div>
+      <div class="tt">🧠 セカンドブレイン（記憶パネル）</div>
       <div class="note" id="notes1"></div>
-      <div class="offmsg">— 接続なし（チャット切替イベント）—</div>
     </div>
+    <div id="saved-pop"></div>
     <button class="btn save" id="btn-save" onclick="saveNote()">🧠 セカンドブレインに保存する</button>
   </div>
 
   <!-- ===== PHASE 2: QUIZ ===== -->
   <div class="card hide" id="sc-quiz">
     <div class="stage" id="q-stage">STEP 2｜思い出す</div>
+    <div class="guide">お客さんの質問に、正しい答えを選んでください。</div>
     <div id="event-area"></div>
     <p class="who" id="q-who"></p>
     <div class="bubble" id="q-bubble"></div>
@@ -92,9 +111,9 @@ h1 .em{color:#4C4AE4}
     <div class="fb" id="q-fb"></div>
     <div class="meter">のこり <div class="bar"><i id="bar" style="width:0%"></i></div> <span id="qnum"></span></div>
     <div class="brain" id="brain2" style="margin-top:14px">
-      <div class="tt">🧠 セカンドブレイン</div>
+      <div class="tt">🧠 セカンドブレイン（記憶パネル）</div>
       <div class="note" id="notes2"></div>
-      <div class="offmsg">— 接続なし（チャット切替イベント）—</div>
+      <div class="offmsg">— 使えません（チャット切替中）—</div>
     </div>
     <button class="btn ghost hide" id="btn-next" onclick="nextQ()">つぎへ →</button>
   </div>
@@ -131,31 +150,38 @@ var QS = [
  {c:3,b:"惣菜をお願いします。あ、それと大事なやつ——私、これダメなんだったよね？",q:"高橋さんのアレルギーは？",a:["かに","卵","えび","なし"],ok:2,brain:true},
  {c:3,b:"今日も惣菜ね。いつもの時間の分だけ。",q:"高橋さんの惣菜タイミングは？",a:["朝","昼","夕方","深夜"],ok:2,brain:true}
 ];
-var saved=[], qi=0, correct=0, cur=null;
+var savedCount=0, qi=0, correct=0, cur=null, firstOff=true;
 function $(id){return document.getElementById(id)}
 function start(){ $("sc-title").classList.add("hide"); $("sc-save").classList.remove("hide"); showIntro(0); }
 function showIntro(i){
-  if(i>=CUSTOMERS.length){ $("sc-save").classList.add("hide"); $("sc-quiz").classList.remove("hide"); nextQ(); return; }
-  $("btn-save").classList.remove("hide");
-  $("iv-who").textContent = "🚪 入店：CUSTOMER " + (i+1);
+  if(i>=CUSTOMERS.length){ finishSave(); return; }
+  $("save-guide").textContent = "お客さんの話を読んで、下のボタンを押してください。（" + (i+1) + "人目／4人）";
+  $("iv-who").textContent = "🚪 入店：" + (i+1) + "人目";
   $("iv-bubble").innerHTML = "<b>"+CUSTOMERS[i].n+"</b>「"+CUSTOMERS[i].first+"」";
+  $("btn-save").textContent = "🧠 セカンドブレインに保存する";
   $("btn-save").onclick = function(){ saveNote(i); };
 }
 function saveNote(i){
-  if(typeof i!=="number") i = Number($("btn-save").dataset.i||0);
   var c = CUSTOMERS[i];
   c.notes.forEach(function(n,j){
-    var k = i*2+j;
-    if(saved.indexOf(k)<0){
-      saved.push(k);
-      var ch = document.createElement("span"); ch.className="chip";
-      ch.innerHTML = "<span class='n'>✔</span>"+n;
-      $("notes1").appendChild(ch);
-      var ch2 = ch.cloneNode(true); $("notes2").appendChild(ch2);
-    }
+    savedCount++;
+    var ch = document.createElement("span"); ch.className="chip";
+    ch.innerHTML = "<span class='n'>✔</span>"+n;
+    $("notes1").appendChild(ch);
+    var ch2 = ch.cloneNode(true); $("notes2").appendChild(ch2);
   });
-  if(i+1 < CUSTOMERS.length){ $("btn-save").dataset.i = i+1; showIntro(i+1); }
-  else { $("btn-save").dataset.i=""; $("btn-save").textContent="✔ 全員ぶ保存した"; $("btn-save").classList.add("hide"); $("sc-save").classList.add("hide"); $("sc-quiz").classList.remove("hide"); nextQ(); }
+  var pop = document.createElement("div"); pop.className="saved-pop";
+  pop.textContent = "✔ 保存した！ 記憶パネルに並びました";
+  $("saved-pop").innerHTML=""; $("saved-pop").appendChild(pop);
+  if(i+1 < CUSTOMERS.length){
+    setTimeout(function(){ showIntro(i+1); }, 700);
+  } else {
+    $("btn-save").classList.add("hide");
+    var done = document.createElement("div"); done.className="saved-pop";
+    done.textContent = "保存おわり！ 次はクイズです →";
+    $("saved-pop").innerHTML=""; $("saved-pop").appendChild(done);
+    setTimeout(function(){ $("sc-save").classList.add("hide"); $("sc-quiz").classList.remove("hide"); nextQ(); }, 900);
+  }
 }
 function nextQ(){
   $("btn-next").classList.add("hide"); $("q-fb").textContent=""; $("q-fb").className="fb";
@@ -163,18 +189,19 @@ function nextQ(){
   cur = QS[qi];
   $("brain2").className = cur.brain ? "brain" : "brain off";
   if(!cur.brain){
-    var ev = document.createElement("div"); ev.className="event"; ev.textContent="⚠ 新しいチャットを開きました";
+    var ev = document.createElement("div"); ev.className="event";
+    ev.innerHTML = '⚠ 新しいチャットを開きました<small>' + (firstOff ? '記憶パネルが使えなくなります。頭の中で覚えていたら、正解できます' : '記憶パネルは使えません') + '</small>';
     $("event-area").innerHTML=""; $("event-area").appendChild(ev);
+    firstOff = false;
   } else { $("event-area").innerHTML=""; }
   $("q-stage").textContent = "STEP 2｜思い出す（" + (qi+1) + "/8）";
   $("q-who").textContent = "🚪 入店：" + CUSTOMERS[cur.c].n;
-  $("q-bubble").innerHTML = "<b>"+CUSTOMERS[cur.c].n+"</b>「"+cur.b+"」";
+  $("q-bubble").innerHTML = "<b>"+CUSTOMERS[cur.c].n+"</b>「"+cur.b+"」<br><span style='color:#4C4AE4'>質問："+cur.q+"</span>";
   $("qnum").textContent = (qi+1)+"/8";
   $("bar").style.width = (qi/8*100)+"%";
   var area = $("q-ans"); area.innerHTML="";
-  var order = cur.a.map(function(v,i){return i});
-  order.forEach(function(idx){
-    var b = document.createElement("button"); b.textContent = cur.a[idx];
+  cur.a.forEach(function(txt, idx){
+    var b = document.createElement("button"); b.textContent = txt;
     b.onclick = function(){ answer(b, idx); };
     area.appendChild(b);
   });
@@ -185,11 +212,11 @@ function answer(btn, idx){
   if(idx === cur.ok){
     btn.className="ok"; correct++;
     $("q-fb").className="fb good";
-    $("q-fb").innerHTML = (cur.brain ? "✔ 覚えていた！「" : "✔ ブレインなしでも、覚えていた！！「") + CUSTOMERS[cur.c].n + "」は笑顔です。";
+    $("q-fb").innerHTML = (cur.brain ? "✔ 正解！ セカンドブレインのおかげ。「" : "✔ 正解！ 記憶パネルなしでも覚えていた。「") + CUSTOMERS[cur.c].n + "」は笑顔です。";
   } else {
     btn.className="ng"; buttons[cur.ok].className="ok";
     $("q-fb").className="fb bad";
-    $("q-fb").innerHTML = "✘ …「はじめまして？」って言われてしまった。";
+    $("q-fb").innerHTML = "✘ 「え? はじめまして?」——説明し直しです。";
   }
   $("bar").style.width = (qi+1)/8*100+"%";
   $("btn-next").classList.remove("hide");
@@ -202,7 +229,6 @@ function end(){
   if(correct===8){ t="🎓 卒業！"; m="完璧です。あなたは「はじめまして」を卒業しました。<br>これが、AIの「記憶」がある世界です。"; }
   else if(correct>=5){ t="もう少し"; m="あと少しで卒業。ちゃんと、頭の中に残ってました？"; }
   else { t="また「はじめまして」から"; m="説明し直しから……じゃなくて、また最初からですね。<br>これが「記憶がない」世界のしんどさです。"; }
-  if(correct===8 && false) t="🎓 卒業！";
   $("end-title").textContent = t;
   $("end-msg").innerHTML = m;
   var s=$("score"); s.innerHTML="";
