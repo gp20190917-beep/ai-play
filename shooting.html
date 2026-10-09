@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>スターシューター｜AI PLAY（非公認ファンメディア）</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:"Zen Kaku Gothic New",sans-serif;background:#F4F5F7;color:#1A1D23;min-height:100vh;display:flex;justify-content:center;padding:14px 10px 36px}
+.app{width:100%;max-width:480px}
+.card{background:#fff;border:1px solid #e3e5ea;border-radius:18px;padding:22px 20px;margin-bottom:14px}
+.badge{display:inline-block;background:#4C4AE4;color:#fff;font-size:12px;font-weight:900;padding:4px 14px;border-radius:999px;letter-spacing:2px}
+h1{font-size:28px;font-weight:900;line-height:1.4;margin-top:10px}
+h1 .em{color:#4C4AE4}
+.lead{font-size:13.5px;color:#5B6172;margin-top:8px;line-height:1.75;font-weight:500}
+.howto{background:#f4f4fb;border-radius:14px;padding:14px 16px;margin-top:14px}
+.howto .tt{font-size:12px;font-weight:900;color:#4C4AE4;letter-spacing:2px;margin-bottom:8px}
+.howto table{width:100%;border-collapse:collapse;font-size:13px}
+.howto td{padding:6px 4px;border-bottom:1px solid #e3e5ea;font-weight:700;line-height:1.5;vertical-align:top}
+.howto td:first-child{color:#5B6172;width:34%}
+.howto tr:last-child td{border-bottom:none}
+.pts{display:flex;gap:10px;margin-top:10px;font-size:12.5px;font-weight:700}
+.pts span{flex:1;background:#101318;color:#fff;border-radius:10px;padding:8px;text-align:center}
+.pts b{color:#F5A623}
+.btn{display:block;width:100%;border:none;background:#4C4AE4;color:#fff;font-family:inherit;font-size:16px;font-weight:900;padding:15px;border-radius:12px;cursor:pointer;margin-top:14px;touch-action:manipulation}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#fff;color:#4C4AE4;border:2px solid #4C4AE4}
+.hud{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.hud .box{background:#101318;border-radius:12px;padding:8px 4px;text-align:center}
+.hud .v{color:#F5A623;font-size:17px;font-weight:900;line-height:1.2}
+.hud .k{color:rgba(255,255,255,.6);font-size:10px;font-weight:700;margin-top:2px}
+.stage{position:relative}
+#cv{display:block;width:100%;height:min(62vh,600px);min-height:440px;border-radius:18px;background:#06070d;touch-action:none;user-select:none}
+.overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,7,13,.72);border-radius:18px;color:#fff;text-align:center;padding:20px}
+.overlay .t{font-size:26px;font-weight:900}
+.overlay .s{font-size:13px;color:rgba(255,255,255,.8);margin-top:8px;font-weight:700;line-height:1.7}
+.overlay button{margin-top:16px;width:auto;padding:12px 30px}
+.ctrl{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:10px}
+.ctrl button{font-family:inherit;font-size:16px;font-weight:900;border:none;border-radius:14px;padding:18px 6px;cursor:pointer;touch-action:none;user-select:none}
+#bPause{background:#fff;color:#1A1D23;border:2px solid #1A1D23}
+#bFire{background:#E8503A;color:#fff}
+#bFire.on{background:#b9321f;transform:scale(.97)}
+.tip{font-size:11.5px;color:#5B6172;font-weight:700;text-align:center;margin-top:8px;line-height:1.7}
+.big{font-size:28px;font-weight:900;text-align:center;margin:10px 0 6px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.stats div{background:#f4f4fb;border-radius:12px;padding:10px 4px;text-align:center}
+.stats b{display:block;font-size:20px;color:#4C4AE4}
+.stats span{font-size:11px;color:#5B6172;font-weight:700}
+.bestline{font-size:12px;color:#5B6172;text-align:center;font-weight:700}
+.links{display:grid;gap:10px;margin-top:14px}
+.links a{display:block;text-align:center;text-decoration:none;font-weight:900;font-size:13.5px;padding:13px;border-radius:12px}
+.links a.n{background:#4C4AE4;color:#fff}
+.links a.f{background:#fff;color:#1A1D23;border:2px solid #1A1D23}
+.ftr{font-size:11px;color:#8a8f9c;text-align:center;line-height:1.9;margin-top:10px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TITLE -->
+  <div class="card" id="sc-title">
+    <span class="badge">AI PLAY・シューティング</span>
+    <h1>スター<span class="em">シューター</span></h1>
+    <p class="lead">上から攻めてくる敵を撃ち落とす、宇宙シューティング。倒すほどレベルが上がって、敵が速く・多くなります。</p>
+    <div class="howto">
+      <div class="tt">あそびかた</div>
+      <table>
+        <tr><td>スマホ</td><td>ゲーム画面を<b>指でなぞって移動</b>／下の<b>「発射」を長押し</b>で連射</td></tr>
+        <tr><td>パソコン</td><td><b>矢印キー</b>か<b>WASD</b>で移動／<b>スペース</b>で連射</td></tr>
+        <tr><td>一時停止</td><td>「一時停止」ボタンか<b>P</b>キー</td></tr>
+        <tr><td>ライフ</td><td>3つ。敵や敵の弾に当たると1つ減る。0でゲームオーバー</td></tr>
+      </table>
+      <div class="pts"><span>通常の敵　<b>100点</b></span><span>強敵（3発必要）　<b>300点</b></span></div>
+    </div>
+    <button class="btn" id="btn-start">▶ スタート</button>
+    <p class="ftr">別のタブに移ると自動で一時停止します｜Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+  </div>
+
+  <!-- PLAY -->
+  <div class="hide" id="sc-play">
+    <div class="hud">
+      <div class="box"><div class="v" id="h-score">0</div><div class="k">スコア</div></div>
+      <div class="box"><div class="v" id="h-level">Lv 1</div><div class="k">レベル</div></div>
+      <div class="box"><div class="v" id="h-life">♥♥♥</div><div class="k">ライフ</div></div>
+    </div>
+    <div class="stage">
+      <canvas id="cv"></canvas>
+      <div class="overlay hide" id="ov-pause">
+        <div class="t">一時停止中</div>
+        <div class="s">続きから遊べます</div>
+        <button class="btn" id="btn-resume">▶ 再開</button>
+      </div>
+    </div>
+    <div class="ctrl"><button id="bPause">⏸ 一時停止</button><button id="bFire">● 発射（長押し）</button></div>
+    <p class="tip">画面をなぞると自機が指についてきます</p>
+  </div>
+
+  <!-- OVER -->
+  <div class="card hide" id="sc-over">
+    <span class="badge" style="background:#E8503A">GAME OVER</span>
+    <div class="big" id="ov-title">ゲームオーバー</div>
+    <div class="stats">
+      <div><b id="s-score">0</b><span>スコア</span></div>
+      <div><b id="s-level">1</b><span>到達レベル</span></div>
+      <div><b id="s-kill">0</b><span>撃墜数</span></div>
+    </div>
+    <p class="bestline" id="s-best"></p>
+    <button class="btn" id="btn-retry">もういちど（Enterキーでも）</button>
+    <div class="links">
+      <a class="f" href="index.html">ほかのゲームで遊ぶ →</a>
+      <a class="n" href="https://gp20190917-beep.github.io/makaseru-ai-life/" target="_blank" rel="noopener">AIに頼んで作りました｜まかせるAI生活 →</a>
+    </div>
+    <p class="ftr">このゲームは、AI（Genspark）に頼んで作りました。<br>Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+  </div>
+
+</div>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+var cv=$("cv"), ctx=cv.getContext("2d");
+var W=360,H=560,DPR=1;
+var state="title", paused=false;
+var ship, bullets, enemies, ebullets, parts, stars, popups;
+var score, level, kills, life, inv, fireCd, spawnT, levelKills;
+var keys={}, firing=false, touchId=null, touchX=0, touchY=0, last=0;
+
+function resize(){
+  DPR=Math.min(window.devicePixelRatio||1,2);
+  var r=cv.getBoundingClientRect();
+  W=r.width||360; H=r.height||560;
+  cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+window.addEventListener("resize",function(){ if(state==="play") resize(); });
+function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+
+function hud(){
+  $("h-score").textContent=score.toLocaleString();
+  $("h-level").textContent="Lv "+level;
+  var h=""; for(var i=0;i<3;i++) h+= i<life ? "♥" : "♡";
+  $("h-life").textContent=h;
+}
+
+function makeStars(){
+  stars=[];
+  for(var i=0;i<70;i++) stars.push({x:Math.random()*W,y:Math.random()*H,v:20+Math.random()*80,s:Math.random()<0.15?2:1});
+}
+
+function start(){
+  $("sc-title").classList.add("hide"); $("sc-over").classList.add("hide"); $("sc-play").classList.remove("hide");
+  $("ov-pause").classList.add("hide");
+  resize(); makeStars();
+  ship={x:W/2,y:H-70,r:16};
+  bullets=[]; enemies=[]; ebullets=[]; parts=[]; popups=[];
+  score=0; level=1; kills=0; levelKills=0; life=3; inv=1.5; fireCd=0; spawnT=0.8;
+  touchX=ship.x; touchY=ship.y; touchId=null; firing=false; keys={};
+  state="play"; paused=false; hud();
+  last=performance.now(); requestAnimationFrame(loop);
+}
+
+function setPause(p){
+  if(state!=="play") return;
+  paused=p;
+  $("ov-pause").classList.toggle("hide",!p);
+  $("bPause").textContent = p ? "▶ 再開" : "⏸ 一時停止";
+  if(!p){ last=performance.now(); requestAnimationFrame(loop); }
+}
+
+function spawnEnemy(){
+  var strongRate=Math.min(0.35,0.08+level*0.03);
+  var strong=Math.random()<strongRate;
+  var r=strong?22:15;
+  enemies.push({
+    x:r+Math.random()*(W-r*2), y:-r-10, r:r,
+    vy:(strong?45:70)+level*9+Math.random()*25,
+    vx:(Math.random()-0.5)*(strong?40:70),
+    hp:strong?3:1, max:strong?3:1, strong:strong,
+    shootT:1+Math.random()*2.2, flash:0, t:Math.random()*6
+  });
+}
+
+function explode(x,y,c,n){
+  for(var i=0;i<n;i++){
+    var a=Math.random()*Math.PI*2, v=40+Math.random()*220;
+    parts.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:0.4+Math.random()*0.5,c:c,s:2+Math.random()*3});
+  }
+}
+
+function hitShip(){
+  if(inv>0) return;
+  life--; inv=1.6;
+  explode(ship.x,ship.y,"#7fd4ff",26);
+  if(navigator.vibrate){ try{ navigator.vibrate(120); }catch(e){} }
+  hud();
+  if(life<=0) end();
+}
+
+function loop(now){
+  if(state!=="play"||paused) return;
+  var dt=clamp((now-last)/1000,0,0.05); last=now;
+  update(dt); draw();
+  requestAnimationFrame(loop);
+}
+
+function update(dt){
+  for(var i=0;i<stars.length;i++){ var s=stars[i]; s.y+=s.v*dt; if(s.y>H){ s.y=0; s.x=Math.random()*W; } }
+  var sp=260;
+  var dx=0, dy=0;
+  if(keys.ArrowLeft||keys.a) dx-=1;
+  if(keys.ArrowRight||keys.d) dx+=1;
+  if(keys.ArrowUp||keys.w) dy-=1;
+  if(keys.ArrowDown||keys.s) dy+=1;
+  if(dx||dy){ ship.x+=dx*sp*dt; ship.y+=dy*sp*dt; }
+  if(touchId!==null){
+    ship.x+=(touchX-ship.x)*Math.min(1,dt*14);
+    ship.y+=(touchY-ship.y)*Math.min(1,dt*14);
+  }
+  ship.x=clamp(ship.x,ship.r,W-ship.r); ship.y=clamp(ship.y,H*0.35,H-ship.r-6);
+  if(inv>0) inv-=dt;
+
+  fireCd-=dt;
+  if((firing||keys[" "]) && fireCd<=0){
+    var gap = level>=5 ? 0.11 : 0.15;
+    fireCd=gap;
+    bullets.push({x:ship.x,y:ship.y-ship.r,vy:-560});
+    if(level>=3){ bullets.push({x:ship.x-10,y:ship.y-ship.r+6,vy:-540,vx:-60}); bullets.push({x:ship.x+10,y:ship.y-ship.r+6,vy:-540,vx:60}); }
+  }
+  for(var b=0;b<bullets.length;b++){ var bu=bullets[b]; bu.y+=bu.vy*dt; bu.x+=(bu.vx||0)*dt; }
+  bullets=bullets.filter(function(u){ return u.y>-20 && u.x>-20 && u.x<W+20; });
+
+  spawnT-=dt;
+  if(spawnT<=0){ spawnEnemy(); spawnT=Math.max(0.28,1.05-level*0.08)*(0.7+Math.random()*0.6); }
+
+  for(var e=0;e<enemies.length;e++){
+    var en=enemies[e];
+    en.t+=dt; en.y+=en.vy*dt; en.x+=en.vx*dt+Math.sin(en.t*2)*(en.strong?14:22)*dt;
+    if(en.x<en.r||en.x>W-en.r) en.vx*=-1;
+    en.x=clamp(en.x,en.r,W-en.r);
+    if(en.flash>0) en.flash-=dt;
+    en.shootT-=dt;
+    if(en.shootT<=0 && en.y>0 && en.y<H*0.7){
+      en.shootT=(en.strong?1.4:2.6)-Math.min(1,level*0.08)+Math.random()*1.2;
+      var ang=Math.atan2(ship.y-en.y,ship.x-en.x), v=150+level*12;
+      ebullets.push({x:en.x,y:en.y+en.r,vx:Math.cos(ang)*v,vy:Math.sin(ang)*v});
+    }
+    var ddx=en.x-ship.x, ddy=en.y-ship.y;
+    if(ddx*ddx+ddy*ddy<(en.r+ship.r-4)*(en.r+ship.r-4)){ en.dead=true; explode(en.x,en.y,en.strong?"#ff8a3d":"#ff5a7a",20); hitShip(); }
+  }
+  for(var k=0;k<bullets.length;k++){
+    var bl=bullets[k];
+    for(var m=0;m<enemies.length;m++){
+      var et=enemies[m]; if(et.dead) continue;
+      var qx=bl.x-et.x, qy=bl.y-et.y;
+      if(qx*qx+qy*qy<(et.r+4)*(et.r+4)){
+        bl.dead=true; et.hp--; et.flash=0.08;
+        if(et.hp<=0){
+          et.dead=true; kills++; levelKills++;
+          var pts=et.strong?300:100; score+=pts;
+          popups.push({x:et.x,y:et.y,s:"+"+pts,life:0.8,c:et.strong?"#ffb340":"#ffffff"});
+          explode(et.x,et.y,et.strong?"#ff8a3d":"#ff5a7a",et.strong?32:18);
+          if(levelKills>=10+level*2){ levelKills=0; level++; popups.push({x:W/2,y:H*0.4,s:"LEVEL UP!  Lv "+level,life:1.4,c:"#F5A623",big:true}); }
+          hud();
+        } else {
+          explode(bl.x,bl.y,"#ffd27f",5);
+        }
+        break;
+      }
+    }
+  }
+  bullets=bullets.filter(function(u){return !u.dead;});
+  enemies=enemies.filter(function(u){return !u.dead && u.y<H+40;});
+
+  for(var n=0;n<ebullets.length;n++){
+    var eb=ebullets[n]; eb.x+=eb.vx*dt; eb.y+=eb.vy*dt;
+    var fx=eb.x-ship.x, fy=eb.y-ship.y;
+    if(fx*fx+fy*fy<(ship.r-5)*(ship.r-5)){ eb.dead=true; hitShip(); }
+  }
+  ebullets=ebullets.filter(function(u){ return !u.dead && u.y<H+20 && u.y>-20 && u.x>-20 && u.x<W+20; });
+
+  for(var p=0;p<parts.length;p++){ var pa=parts[p]; pa.x+=pa.vx*dt; pa.y+=pa.vy*dt; pa.vx*=0.96; pa.vy*=0.96; pa.life-=dt; }
+  parts=parts.filter(function(u){return u.life>0;});
+  for(var q=0;q<popups.length;q++){ popups[q].y-=34*dt; popups[q].life-=dt; }
+  popups=popups.filter(function(u){return u.life>0;});
+}
+
+function drawShip(){
+  if(inv>0 && Math.floor(inv*10)%2===0) return;
+  ctx.save(); ctx.translate(ship.x,ship.y);
+  ctx.fillStyle="#ffb340"; ctx.beginPath(); ctx.moveTo(-6,14); ctx.lineTo(0,22+Math.random()*6); ctx.lineTo(6,14); ctx.fill();
+  ctx.fillStyle="#7fd4ff";
+  ctx.beginPath(); ctx.moveTo(0,-18); ctx.lineTo(15,14); ctx.lineTo(0,8); ctx.lineTo(-15,14); ctx.closePath(); ctx.fill();
+  ctx.fillStyle="#ffffff"; ctx.beginPath(); ctx.arc(0,-2,4,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawEnemy(en){
+  ctx.save(); ctx.translate(en.x,en.y);
+  var c = en.flash>0 ? "#ffffff" : (en.strong ? "#ff8a3d" : "#ff5a7a");
+  ctx.fillStyle=c;
+  if(en.strong){
+    ctx.beginPath();
+    for(var i=0;i<6;i++){ var a=Math.PI/3*i+en.t; ctx.lineTo(Math.cos(a)*en.r,Math.sin(a)*en.r); }
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle="#1a0d06"; ctx.beginPath(); ctx.arc(0,0,en.r*0.42,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle="rgba(255,255,255,.25)"; ctx.fillRect(-en.r,-en.r-9,en.r*2,4);
+    ctx.fillStyle="#F5A623"; ctx.fillRect(-en.r,-en.r-9,en.r*2*(en.hp/en.max),4);
+  } else {
+    ctx.beginPath(); ctx.moveTo(0,en.r); ctx.lineTo(en.r,-en.r*0.6); ctx.lineTo(0,-en.r*0.2); ctx.lineTo(-en.r,-en.r*0.6); ctx.closePath(); ctx.fill();
+  }
+  ctx.restore();
+}
+
+function draw(){
+  ctx.fillStyle="#06070d"; ctx.fillRect(0,0,W,H);
+  for(var i=0;i<stars.length;i++){ var s=stars[i]; ctx.fillStyle = s.s>1 ? "rgba(255,255,255,.9)" : "rgba(160,170,220,.55)"; ctx.fillRect(s.x,s.y,s.s,s.s); }
+  ctx.fillStyle="#fff3c4";
+  for(var b=0;b<bullets.length;b++){ ctx.fillRect(bullets[b].x-2,bullets[b].y-8,4,12); }
+  ctx.fillStyle="#ff6bd0";
+  for(var e=0;e<ebullets.length;e++){ ctx.beginPath(); ctx.arc(ebullets[e].x,ebullets[e].y,4,0,Math.PI*2); ctx.fill(); }
+  for(var n=0;n<enemies.length;n++) drawEnemy(enemies[n]);
+  drawShip();
+  for(var p=0;p<parts.length;p++){ var pa=parts[p]; ctx.globalAlpha=clamp(pa.life*1.8,0,1); ctx.fillStyle=pa.c; ctx.fillRect(pa.x,pa.y,pa.s,pa.s); }
+  ctx.globalAlpha=1;
+  ctx.textAlign="center"; ctx.textBaseline="middle";
+  for(var q=0;q<popups.length;q++){ var po=popups[q]; ctx.globalAlpha=clamp(po.life*1.6,0,1); ctx.fillStyle=po.c; ctx.font=(po.big?"900 22px ":"900 14px ")+'"Zen Kaku Gothic New",sans-serif'; ctx.fillText(po.s,po.x,po.y); }
+  ctx.globalAlpha=1;
+}
+
+function end(){
+  state="over";
+  $("sc-play").classList.add("hide"); $("sc-over").classList.remove("hide");
+  $("s-score").textContent=score.toLocaleString(); $("s-level").textContent=level; $("s-kill").textContent=kills;
+  var best=0; try{ best=Number(localStorage.getItem("starshooter_best")||0); if(score>best){ best=score; localStorage.setItem("starshooter_best",String(best)); } }catch(e){ best=score; }
+  $("s-best").textContent="ハイスコア："+best.toLocaleString();
+  $("ov-title").textContent = score>=best && score>0 ? "🏆 ハイスコア更新！" : "ゲームオーバー";
+  window.scrollTo(0,0);
+}
+
+function toLocal(t){ var r=cv.getBoundingClientRect(); return {x:t.clientX-r.left, y:t.clientY-r.top}; }
+cv.addEventListener("pointerdown",function(e){ if(state!=="play"||paused) return; touchId=e.pointerId; var p=toLocal(e); touchX=p.x; touchY=p.y-40; try{cv.setPointerCapture(e.pointerId);}catch(x){} e.preventDefault(); });
+cv.addEventListener("pointermove",function(e){ if(e.pointerId!==touchId) return; var p=toLocal(e); touchX=p.x; touchY=p.y-40; e.preventDefault(); });
+function upPtr(e){ if(e.pointerId===touchId) touchId=null; }
+cv.addEventListener("pointerup",upPtr); cv.addEventListener("pointercancel",upPtr);
+
+var bf=$("bFire");
+function fireOn(e){ firing=true; bf.classList.add("on"); e.preventDefault(); }
+function fireOff(){ firing=false; bf.classList.remove("on"); }
+bf.addEventListener("pointerdown",fireOn); bf.addEventListener("pointerup",fireOff); bf.addEventListener("pointerleave",fireOff); bf.addEventListener("pointercancel",fireOff);
+bf.addEventListener("contextmenu",function(e){ e.preventDefault(); });
+
+$("bPause").addEventListener("click",function(){ setPause(!paused); });
+$("btn-resume").addEventListener("click",function(){ setPause(false); });
+$("btn-start").addEventListener("click",start);
+$("btn-retry").addEventListener("click",start);
+
+document.addEventListener("keydown",function(e){
+  var k=e.key.length===1?e.key.toLowerCase():e.key;
+  if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"," "].indexOf(e.key)>=0) e.preventDefault();
+  if(k==="p" && state==="play"){ setPause(!paused); return; }
+  if(e.key==="Enter" && state!=="play"){ start(); return; }
+  keys[k]=true;
+});
+document.addEventListener("keyup",function(e){ var k=e.key.length===1?e.key.toLowerCase():e.key; keys[k]=false; });
+document.addEventListener("visibilitychange",function(){ if(document.hidden && state==="play" && !paused) setPause(true); });
+window.addEventListener("blur",function(){ keys={}; fireOff(); });
+
+if(location.search.indexOf("demo")>=0){
+  start();
+  for(var i=0;i<6;i++) spawnEnemy();
+  enemies.forEach(function(en,i){ en.y=60+i*55; en.x=50+((i*97)%(W-100)); });
+  enemies[0].strong=true; enemies[0].r=22; enemies[0].hp=2; enemies[0].max=3;
+  firing=true;
+}
+})();
+</script>
+</body>
+</html>
