@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>はじめまして、を卒業｜AI PLAY（非公認ファンメディア）</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Zen Kaku Gothic New",sans-serif;background:#F4F5F7;color:#1A1D23;min-height:100vh;display:flex;justify-content:center;padding:18px 12px 40px}
+.app{width:100%;max-width:480px}
+.card{background:#fff;border:1px solid #e3e5ea;border-radius:18px;padding:22px 20px;margin-bottom:14px}
+.badge{display:inline-block;background:#4C4AE4;color:#fff;font-size:12px;font-weight:900;padding:4px 14px;border-radius:999px;letter-spacing:2px}
+h1{font-size:26px;font-weight:900;line-height:1.4;margin-top:10px}
+h1 .em{color:#4C4AE4}
+.lead{font-size:13.5px;color:#5B6172;margin-top:8px;line-height:1.75;font-weight:500}
+.stage{font-size:12px;font-weight:900;color:#F5A623;letter-spacing:2px;margin-bottom:8px}
+.bubble{background:#f4f4fb;border-left:4px solid #4C4AE4;border-radius:0 12px 12px 0;padding:12px 14px;font-size:15px;font-weight:700;line-height:1.7;margin:10px 0}
+.who{font-size:12px;color:#5B6172;font-weight:900;margin-bottom:2px}
+.note{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;min-height:34px}
+.chip{background:#1A1D23;color:#F7F7F4;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px}
+.chip .n{color:#F5A623;margin-right:6px}
+.brain{background:#101318;border-radius:14px;padding:14px 16px}
+.brain .tt{color:#F5A623;font-size:11px;font-weight:900;letter-spacing:2px}
+.brain.off{opacity:.35}
+.brain .offmsg{display:none;color:#fff;font-size:13px;font-weight:900;text-align:center;padding:8px 0}
+.brain.off .offmsg{display:block}
+.brain.off .note{display:none}
+.btn{display:block;width:100%;border:none;background:#4C4AE4;color:#fff;font-family:inherit;font-size:16px;font-weight:900;padding:15px;border-radius:12px;cursor:pointer;margin-top:12px}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#fff;color:#4C4AE4;border:2px solid #4C4AE4}
+.btn.save{background:#F5A623;color:#14161c}
+.ans{display:grid;gap:10px;margin-top:14px}
+.ans button{font-family:inherit;font-size:15.5px;font-weight:700;padding:14px;border-radius:12px;border:2px solid #d8dade;background:#fff;color:#1A1D23;cursor:pointer;text-align:left}
+.ans button:active{transform:scale(.98)}
+.ans button.ok{border-color:#0e8a6d;background:#eaf7f3;color:#0e8a6d}
+.ans button.ng{border-color:#E8503A;background:#fdeeec;color:#E8503A}
+.ans button:disabled{cursor:default}
+.fb{font-size:13.5px;font-weight:900;margin-top:12px;line-height:1.7}
+.fb.good{color:#0e8a6d}.fb.bad{color:#E8503A}
+.meter{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:12px;font-weight:900;color:#5B6172}
+.bar{flex:1;height:10px;background:#eceef1;border-radius:5px;overflow:hidden}
+.bar i{display:block;height:100%;background:#4C4AE4;border-radius:5px;transition:width .3s}
+.event{background:#1A1D23;color:#F5A623;border-radius:14px;padding:16px;font-size:15px;font-weight:900;text-align:center;letter-spacing:1px;animation:pu .4s ease}
+@keyframes pu{0%{transform:scale(.94);opacity:0}100%{transform:scale(1);opacity:1}}
+.big{font-size:34px;font-weight:900;text-align:center;margin:14px 0}
+.score{display:flex;justify-content:center;gap:6px;margin:12px 0}
+.score i{width:26px;height:26px;border-radius:50%;background:#eceef1}
+.score i.g{background:#0e8a6d}
+.ftr{font-size:11px;color:#8a8f9c;text-align:center;line-height:1.9;margin-top:8px}
+.links{display:grid;gap:10px;margin-top:14px}
+.links a{display:block;text-align:center;text-decoration:none;font-weight:900;font-size:14px;padding:13px;border-radius:12px}
+.links a.n{background:#4C4AE4;color:#fff}
+.links a.s{background:#fff;color:#1A1D23;border:2px solid #1A1D23}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== TITLE ===== -->
+  <div class="card" id="sc-title">
+    <span class="badge">AI PLAY・第1弾</span>
+    <h1>はじめまして、を<br><span class="em">卒業</span>するゲーム</h1>
+    <p class="lead">あなたは、小さな店のAIアシスタント。<br>常連さんたちの「いつもの」を覚えて、正しく応えるのが仕事です。<br><b>覚えたことは「セカンドブレイン」に保存</b>——でも、チャットが変わると……？</p>
+    <button class="btn" onclick="start()">店に入る</button>
+    <p class="ftr">全8問・約2分｜Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+  </div>
+
+  <!-- ===== PHASE 1: SAVE NOTES ===== -->
+  <div class="card hide" id="sc-save">
+    <div class="stage">STEP 1｜おぼえる</div>
+    <div id="intro-area">
+      <p class="who" id="iv-who"></p>
+      <div class="bubble" id="iv-bubble"></div>
+    </div>
+    <div class="brain" id="brain1">
+      <div class="tt">🧠 セカンドブレイン</div>
+      <div class="note" id="notes1"></div>
+      <div class="offmsg">— 接続なし（チャット切替イベント）—</div>
+    </div>
+    <button class="btn save" id="btn-save" onclick="saveNote()">🧠 セカンドブレインに保存する</button>
+  </div>
+
+  <!-- ===== PHASE 2: QUIZ ===== -->
+  <div class="card hide" id="sc-quiz">
+    <div class="stage" id="q-stage">STEP 2｜思い出す</div>
+    <div id="event-area"></div>
+    <p class="who" id="q-who"></p>
+    <div class="bubble" id="q-bubble"></div>
+    <div class="ans" id="q-ans"></div>
+    <div class="fb" id="q-fb"></div>
+    <div class="meter">のこり <div class="bar"><i id="bar" style="width:0%"></i></div> <span id="qnum"></span></div>
+    <div class="brain" id="brain2" style="margin-top:14px">
+      <div class="tt">🧠 セカンドブレイン</div>
+      <div class="note" id="notes2"></div>
+      <div class="offmsg">— 接続なし（チャット切替イベント）—</div>
+    </div>
+    <button class="btn ghost hide" id="btn-next" onclick="nextQ()">つぎへ →</button>
+  </div>
+
+  <!-- ===== RESULT ===== -->
+  <div class="card hide" id="sc-end">
+    <div class="stage">結果</div>
+    <div class="big" id="end-title"></div>
+    <div class="score" id="score"></div>
+    <p class="lead" id="end-msg" style="text-align:center"></p>
+    <div class="links">
+      <a class="n" href="https://note.com/makaseru_ai50" target="_blank" rel="noopener">「記憶」の仕組みの話は note で →</a>
+      <a class="s" href="https://gp20190917-beep.github.io/makaseru-ai-life/" target="_blank" rel="noopener">AIに頼んで作りました｜まかせるAI生活 →</a>
+    </div>
+    <button class="btn ghost" onclick="location.reload()">もういちど遊ぶ</button>
+    <p class="ftr">このゲームは、AI（Genspark）に頼んで作りました。実在の人物・店舗とは関係ありません。<br>Genspark 非公認ファンメディア｜※紹介リンク（PR）を含みます</p>
+  </div>
+
+</div>
+<script>
+var CUSTOMERS = [
+ {n:"山田さん", first:"いつも朝、コーヒー頼むね。あ、ミルクは多めで。あと砂糖は入れないでほしいな。", notes:["山田：ミルク多め","山田：砂糖なし"]},
+ {n:"佐藤さん", first:"昼によく来るんです。辛いもの好きなんですよ。あとご飯は大盛りで。", notes:["佐藤：辛いもの好き","佐藤：ご飯大盛り"]},
+ {n:"鈴木さん", first:"午後のスイーツ担当です。甘さは控えめがいいのと、飲み物はホットで。", notes:["鈴木：甘さ控えめ","鈴木：ホットで"]},
+ {n:"高橋さん", first:"夕方、晩ごはんの惣菜を買うんです。そういえば——えびのアレルギーがあるから、気をつけてほしいんだ。", notes:["高橋：えびアレルギー","高橋：惣菜は夕方"]}
+];
+var QS = [
+ {c:0,b:"コーヒー、いつもの感じで。",q:"山田さんのミルクは？",a:["多め","ふつう","少なめ","入れない"],ok:0,brain:true},
+ {c:0,b:"あったかいのにするよ。",q:"山田さんの砂糖は？",a:["1つ","2つ","入れない","たっぷり"],ok:2,brain:true},
+ {c:1,b:"ちょっと! チャットを切り替えたみたい。新しいチャットだ。さて——俺の辛さの好み、分かる？",q:"佐藤さんの辛さは？",a:["辛いもの好き","辛いのは苦手","ふつう","激辛がダメ"],ok:0,brain:false},
+ {c:1,b:"今日のランチ！ ご飯のサイズはいつものね。",q:"佐藤さんのご飯は？",a:["小盛り","ふつう","大盛り","パンに変更"],ok:2,brain:true},
+ {c:2,b:"スイーツ、たのむね。甘さはいつもの感じで。",q:"鈴木さんの甘さは？",a:["たっぷり","控えめ","普通","甘さ無限"],ok:1,brain:true},
+ {c:2,b:"飲み物も頼むね。……あれ、またチャットが変わった。うち、覚えてる？",q:"鈴木さんの飲み物は？",a:["アイス","氷抜き","ぬるま","ホット"],ok:3,brain:false},
+ {c:3,b:"惣菜をお願いします。あ、それと大事なやつ——私、これダメなんだったよね？",q:"高橋さんのアレルギーは？",a:["かに","卵","えび","なし"],ok:2,brain:true},
+ {c:3,b:"今日も惣菜ね。いつもの時間の分だけ。",q:"高橋さんの惣菜タイミングは？",a:["朝","昼","夕方","深夜"],ok:2,brain:true}
+];
+var saved=[], qi=0, correct=0, cur=null;
+function $(id){return document.getElementById(id)}
+function start(){ $("sc-title").classList.add("hide"); $("sc-save").classList.remove("hide"); showIntro(0); }
+function showIntro(i){
+  if(i>=CUSTOMERS.length){ $("sc-save").classList.add("hide"); $("sc-quiz").classList.remove("hide"); nextQ(); return; }
+  $("btn-save").classList.remove("hide");
+  $("iv-who").textContent = "🚪 入店：CUSTOMER " + (i+1);
+  $("iv-bubble").innerHTML = "<b>"+CUSTOMERS[i].n+"</b>「"+CUSTOMERS[i].first+"」";
+  $("btn-save").onclick = function(){ saveNote(i); };
+}
+function saveNote(i){
+  if(typeof i!=="number") i = Number($("btn-save").dataset.i||0);
+  var c = CUSTOMERS[i];
+  c.notes.forEach(function(n,j){
+    var k = i*2+j;
+    if(saved.indexOf(k)<0){
+      saved.push(k);
+      var ch = document.createElement("span"); ch.className="chip";
+      ch.innerHTML = "<span class='n'>✔</span>"+n;
+      $("notes1").appendChild(ch);
+      var ch2 = ch.cloneNode(true); $("notes2").appendChild(ch2);
+    }
+  });
+  if(i+1 < CUSTOMERS.length){ $("btn-save").dataset.i = i+1; showIntro(i+1); }
+  else { $("btn-save").dataset.i=""; $("btn-save").textContent="✔ 全員ぶ保存した"; $("btn-save").classList.add("hide"); $("sc-save").classList.add("hide"); $("sc-quiz").classList.remove("hide"); nextQ(); }
+}
+function nextQ(){
+  $("btn-next").classList.add("hide"); $("q-fb").textContent=""; $("q-fb").className="fb";
+  if(qi>=QS.length){ end(); return; }
+  cur = QS[qi];
+  $("brain2").className = cur.brain ? "brain" : "brain off";
+  if(!cur.brain){
+    var ev = document.createElement("div"); ev.className="event"; ev.textContent="⚠ 新しいチャットを開きました";
+    $("event-area").innerHTML=""; $("event-area").appendChild(ev);
+  } else { $("event-area").innerHTML=""; }
+  $("q-stage").textContent = "STEP 2｜思い出す（" + (qi+1) + "/8）";
+  $("q-who").textContent = "🚪 入店：" + CUSTOMERS[cur.c].n;
+  $("q-bubble").innerHTML = "<b>"+CUSTOMERS[cur.c].n+"</b>「"+cur.b+"」";
+  $("qnum").textContent = (qi+1)+"/8";
+  $("bar").style.width = (qi/8*100)+"%";
+  var area = $("q-ans"); area.innerHTML="";
+  var order = cur.a.map(function(v,i){return i});
+  order.forEach(function(idx){
+    var b = document.createElement("button"); b.textContent = cur.a[idx];
+    b.onclick = function(){ answer(b, idx); };
+    area.appendChild(b);
+  });
+}
+function answer(btn, idx){
+  var buttons = $("q-ans").querySelectorAll("button");
+  buttons.forEach(function(b){ b.disabled = true; });
+  if(idx === cur.ok){
+    btn.className="ok"; correct++;
+    $("q-fb").className="fb good";
+    $("q-fb").innerHTML = (cur.brain ? "✔ 覚えていた！「" : "✔ ブレインなしでも、覚えていた！！「") + CUSTOMERS[cur.c].n + "」は笑顔です。";
+  } else {
+    btn.className="ng"; buttons[cur.ok].className="ok";
+    $("q-fb").className="fb bad";
+    $("q-fb").innerHTML = "✘ …「はじめまして？」って言われてしまった。";
+  }
+  $("bar").style.width = (qi+1)/8*100+"%";
+  $("btn-next").classList.remove("hide");
+  $("btn-next").textContent = (qi===7) ? "結果を見る →" : "つぎへ →";
+  qi++;
+}
+function end(){
+  $("sc-quiz").classList.add("hide"); $("sc-end").classList.remove("hide");
+  var t, m;
+  if(correct===8){ t="🎓 卒業！"; m="完璧です。あなたは「はじめまして」を卒業しました。<br>これが、AIの「記憶」がある世界です。"; }
+  else if(correct>=5){ t="もう少し"; m="あと少しで卒業。ちゃんと、頭の中に残ってました？"; }
+  else { t="また「はじめまして」から"; m="説明し直しから……じゃなくて、また最初からですね。<br>これが「記憶がない」世界のしんどさです。"; }
+  if(correct===8 && false) t="🎓 卒業！";
+  $("end-title").textContent = t;
+  $("end-msg").innerHTML = m;
+  var s=$("score"); s.innerHTML="";
+  for(var i=0;i<8;i++){ var d=document.createElement("i"); if(i<correct) d.className="g"; s.appendChild(d); }
+}
+</script>
+</body>
+</html>
