@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>このゲームの作り方｜AI PLAY（非公認ファンメディア）</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Zen Kaku Gothic New",sans-serif;background:#F4F5F7;color:#1A1D23;min-height:100vh;display:flex;justify-content:center;padding:24px 14px 40px;line-height:1.8}
+.app{width:100%;max-width:640px}
+.hdr{background:#101318;color:#fff;border-radius:18px;padding:22px 24px;margin-bottom:16px}
+.hdr .logo{font-size:28px;font-weight:900;letter-spacing:2px}.hdr .logo b{color:#E8503A}
+.hdr p{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px}
+.card{background:#fff;border:1px solid #e3e5ea;border-radius:18px;padding:20px 22px;margin-bottom:14px}
+.card h2{font-size:17px;font-weight:900;line-height:1.6}
+.card p{font-size:13.5px;color:#3c4150;line-height:1.9;margin-top:8px}
+.card p b{color:#1A1D23}
+.tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+.tbl th{background:#EEF0FF;color:#34329E;padding:10px;border:1px solid #e3e5ea;text-align:left;font-weight:800}
+.tbl td{padding:10px;border:1px solid #e3e5ea;background:#fff}
+.steps{counter-reset:st;margin-top:10px;padding:0;list-style:none}
+.steps li{position:relative;padding-left:40px;margin-bottom:12px;font-size:13.5px}
+.steps li:before{counter-increment:st;content:counter(st);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:#F5A623;color:#14161c;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:14px}
+.quote{background:#FFF6E3;border-left:4px solid #F5A623;border-radius:0 10px 10px 0;padding:12px 16px;font-size:13.5px;font-weight:700;margin-top:10px}
+.micro{font-size:11.5px;color:#8a8f9c;margin:12px 2px;line-height:1.9}
+.btn{display:inline-block;margin-top:12px;background:#F5A623;color:#14161c;font-weight:900;font-size:14px;padding:11px 26px;border-radius:999px;text-decoration:none}
+.btn.ghost{background:#fff;border:1.5px solid #e3e5ea}
+.ftr{font-size:11px;color:#8a8f9c;text-align:center;line-height:1.9;margin-top:12px}
+.ftr a{color:#4C4AE4}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hdr">
+    <div class="logo">AI <b>PLAY</b></div>
+    <p>ここのゲームが「どうやって作られたか」の裏側。作り方は、どれも同じです——<strong>プログラムは、人間が1行も書いていません</strong>。</p>
+  </div>
+
+  <div class="card">
+    <h2>開発環境は、これだけ</h2>
+    <p>・<strong>スマホ or パソコンのブラウザ</strong>（アプリのインストール不要）<br>
+    ・<strong>Gensparkのチャット</strong>——AIにお願いを書いて送るだけ<br>
+    ・<strong>公開先</strong>：GitHub Pages（無料。エージェントが設定・反映まで行う）</p>
+    <p>コードエディタも、開発ソフトも、プログラミングの知識も使いません。<strong>「こんなゲームを作って」と文章で頼む</strong>ことが、開発のすべてです。</p>
+  </div>
+
+  <div class="card">
+    <h2>ゲームごとの作り方</h2>
+    <table class="tbl">
+      <thead><tr><th>ゲーム</th><th>作ったのは</th><th>作り方</th></tr></thead>
+      <tbody>
+        <tr><td>はじめまして、を卒業するゲーム<br>おまかせバランス<br>ぶん投げ店長<br>スターシューター</td><td>エージェント<br>（Genspark内）</td><td>チャットで依頼 → エージェントが作成・テスト → そのまま公開</td></tr>
+        <tr><td><strong>NEON STRIKE</strong></td><td>AIチャットの<strong>Claude</strong></td><td>AIチャットで依頼して完成 → 別チャットのエージェントが<strong>回収</strong>して公開（下に詳しく書きます）</td></tr>
+      </tbody>
+    </table>
+    <p>どちらも、私が書いたコードは<strong>0行</strong>です。</p>
+  </div>
+
+  <div class="card">
+    <h2>NEON STRIKEの回収——Gensparkの醍醐味だったところ</h2>
+    <p>NEON STRIKEは、AIチャットでClaudeに頼んで作った、約3万字の本格弾幕シューティングです。ただ、作った直後は<strong>そのチャットの中にしか存在しない</strong>。URLも無ければ、ファイルもない。「作った」で止まっていました。</p>
+    <p>そこで、別のチャットのエージェントにこう伝えました。</p>
+    <div class="quote">別のチャットでシューティングゲーム作ったから、遊べるようにして</div>
+    <p>エージェントが行ったのは、この4手順です。</p>
+    <ol class="steps">
+      <li><strong>探す</strong>——過去のチャットの記録を検索して、あのチャットを特定する</li>
+      <li><strong>取りに行く</strong>——チャットを「リンク公開」に切り替えて、本物のコードを読み取る</li>
+      <li><strong>試す</strong>——構文チェックと自動プレイテスト（約27秒ぶん）を通してから公開する</li>
+      <li><strong>置く</strong>——ゲーム置き場（このサイト）に追加して、URLを発行</li>
+    </ol>
+    <p>私がやったのは、最初の一言だけです。コピーもペーストも、ファイルの保存もしていません。</p>
+    <p><strong>これがGensparkの醍醐味だと思っています。</strong>作る場所（AIチャット）と、使う場所（ウェブ）が違っていい。作ったものが、そのまま<strong>資産</strong>になっていく。</p>
+    <p class="micro">※ 正直な注意：回収の途中で、記録から取れない部分がありました（タイトル画面の操作説明の日本語）。そこは実際の操作内容から書き直してもらいました。ゲームの中身まで変わるときは、事前に伝えるのがうちのルールです。</p>
+  </div>
+
+  <div class="card">
+    <h2>手順は「スキル」にして、配っています</h2>
+    <p>この回収の手順は、そのまま再現できる形（スキル）にして、無料で配布しています。あなたのGensparkに入れれば、「別のチャットで作った○○、使えるようにして」の一言で同じことができます。</p>
+    <a class="btn" href="https://gp20190917-beep.github.io/makaseru-ai-life/skills.html">スキル置き場を見る →</a>
+  </div>
+
+  <div class="card">
+    <h2>つぎの実験：Claude vs GPT</h2>
+    <p>同じお題を、違うモデルに作らせて比べる——これを次の企画として進めています。NEON STRIKEはClaude製。次はGPT（または別のClaude）製のゲームが入る予定です。遊び心地の違いが分かるようになったら、比べる記事も書きます。</p>
+    <a class="btn ghost" href="https://note.com/makaseru_ai50" target="_blank" rel="noopener">経過はnoteで発表します</a>
+  </div>
+
+  <p class="ftr">このサイトはGensparkの非公認ファンメディアが運営しています。Genspark社とは無関係です。<br><a href="index.html">← ゲーム置き場へ戻る</a>　｜　<a href="https://gp20190917-beep.github.io/makaseru-ai-life/">まかせるAI生活（本サイト）</a></p>
+</div>
+</body>
+</html>
