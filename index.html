@@ -7,121 +7,114 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Zen Kaku Gothic New",sans-serif;background:#F4F5F7;color:#1A1D23;min-height:100vh;display:flex;justify-content:center;padding:24px 14px 40px}
-.app{width:100%;max-width:640px}
-.hdr{background:#101318;color:#fff;border-radius:18px;padding:22px 24px;margin-bottom:16px}
-.hdr .logo{font-size:28px;font-weight:900;letter-spacing:2px}.hdr .logo b{color:#E8503A}
-.hdr p{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px;line-height:1.7;font-weight:500}
-.card{background:#fff;border:1px solid #e3e5ea;border-radius:18px;padding:20px 22px;margin-bottom:14px}
-.game{display:flex;gap:16px;align-items:center}
-.thumb{width:92px;height:92px;border-radius:14px;background:linear-gradient(135deg,#4C4AE4,#1A1D23);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0}
-h2{font-size:18px;font-weight:900;line-height:1.5}
-p{font-size:13px;color:#5B6172;line-height:1.75;margin-top:6px;font-weight:500}
-.play{display:inline-block;margin-top:10px;background:#F5A623;color:#14161c;font-weight:900;font-size:14px;padding:10px 22px;border-radius:999px;text-decoration:none}
-.soon{opacity:.55}
-.soon .thumb{background:#d8dade;color:#8a8f9c}
-.soon .play{background:#eceef1;color:#8a8f9c;pointer-events:none}
-.cta{background:#101318;border-radius:18px;padding:20px 22px}
-.cta .l{color:#fff;font-size:14px;font-weight:700;line-height:1.7}
-.cta a{display:inline-block;margin-top:12px;background:#F5A623;color:#14161c;font-weight:900;font-size:14px;padding:10px 22px;border-radius:999px;text-decoration:none}
-.soon2{background:#fff;border:1.5px dashed #c9ccd2;border-radius:18px;padding:20px 22px}
-.soon2 h2{color:#5B6172}
-.ftr{font-size:11px;color:#8a8f9c;text-align:center;line-height:1.9;margin-top:10px}
+body{font-family:"Zen Kaku Gothic New",sans-serif;background:#EDEEF2;color:#1A1D23;min-height:100vh;display:flex;justify-content:center;padding:20px 12px 44px;line-height:1.8}
+.app{width:100%;max-width:600px}
+.hdr{background:#1A1D23;color:#fff;border-radius:20px;padding:26px 26px 24px;margin-bottom:18px}
+.hdr .logo{font-size:32px;font-weight:900;letter-spacing:2px}
+.hdr .logo b{color:#F5A623}
+.hdr p{font-size:14.5px;color:rgba(255,255,255,.78);margin-top:8px;line-height:1.85}
+.howto{background:#fff;border-radius:18px;padding:20px 24px;margin-bottom:18px;font-size:14px}
+.howto b{color:#1A1D23}
+.howto .t{font-weight:900;font-size:16px}
+.howto p{color:#3C4150;margin-top:6px}
+.card{background:#fff;border-radius:20px;overflow:hidden;margin-bottom:20px;box-shadow:0 2px 14px rgba(20,24,40,.07)}
+.shot{width:100%;height:200px;object-fit:cover;object-position:top;display:block;background:#0a0d18}
+.inner{padding:18px 22px 20px}
+.tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.05em;color:#8a5d00;background:#FFF1D6;border-radius:999px;padding:4px 14px}
+h2{font-size:20px;font-weight:900;line-height:1.5;margin-top:10px}
+.desc{font-size:15px;color:#3C4150;line-height:1.9;margin-top:8px}
+.dev{margin-top:12px;font-size:12.5px;color:#565B6B;font-weight:700;background:#F1F2F6;border-radius:10px;padding:8px 14px;display:inline-block}
+.play{display:inline-block;margin-top:14px;background:#F5A623;color:#14161c;font-weight:900;font-size:15px;padding:12px 30px;border-radius:999px;text-decoration:none}
+.soon .shot{filter:grayscale(1) opacity(.5)}
+.soon .tag{background:#ECECEF;color:#8a8f9c}
+.soon .play{background:#ECECEF;color:#8a8f9c;pointer-events:none}
+.dev-note{background:#101318;color:#fff;border-radius:20px;padding:22px 24px;margin-bottom:20px}
+.dev-note .t{font-size:16.5px;font-weight:900;line-height:1.6}
+.dev-note p{font-size:13.5px;color:rgba(255,255,255,.72);margin-top:8px}
+.dev-note a{display:inline-block;margin-top:14px;background:#fff;color:#14161c;font-weight:900;font-size:14.5px;padding:11px 26px;border-radius:999px;text-decoration:none}
+.cta{background:#1A1D23;border-radius:20px;padding:22px 24px;margin-bottom:20px}
+.cta .l{color:#fff;font-size:14.5px;font-weight:700;line-height:1.8}
+.cta a{display:inline-block;margin-top:12px;background:#F5A623;color:#14161c;font-weight:900;font-size:14.5px;padding:11px 26px;border-radius:999px;text-decoration:none}
+.ftr{font-size:12.5px;color:#565B6B;text-align:center;line-height:2;margin-top:6px}
+.ftr a{color:#4C4AE4;font-weight:700}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="hdr">
     <div class="logo">AI <b>PLAY</b></div>
-    <p>AIに頼んで作ったゲームの置き場。ブラウザだけで遊べます（インストール不要・無料）。<br>非公認ファンメディア運営</p>
+    <p>AIに頼んで作ったゲームの置き場。ブラウザだけで遊べます（インストール不要・無料）。プログラムは人間が1行も書いていません。</p>
+  </div>
+
+  <div class="howto">
+    <span class="t">はじめての方へ</span>
+    <p>カードの<strong>「遊ぶ →」</strong>を押すだけで始まります。保存・登録・インストールは不要。スマホは<strong>指でなぞる</strong>操作です。</p>
   </div>
 
   <div class="card">
-    <div class="game">
-      <div class="thumb">🧠</div>
-      <div>
-        <h2>はじめまして、を卒業するゲーム</h2>
-        <p>常連さんの「いつもの」を覚える店員ゲーム。全8問・約2分。AIの「記憶」の仕組みが、遊べば分かります。</p>
-        <a class="play" href="memory-game.html">遊ぶ →</a>
-        <p style="margin-top:8px;font-size:11.5px;color:#8a8f9c;font-weight:700">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="game">
-      <div class="thumb">⚖️</div>
-      <div>
-        <h2>おまかせバランス——それ、AIに任せて大丈夫？</h2>
-        <p>1か月ぶんの仕事10個が降ってくる。クレジット・時間・面白さの3本のゲージを切らさない判断ゲーム。約2分。</p>
-        <a class="play" href="balance-game.html">遊ぶ →</a>
-        <p style="margin-top:8px;font-size:11.5px;color:#8a8f9c;font-weight:700">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
-      </div>
+    <img class="shot" src="img/neon.png" alt="NEON STRIKEのプレイ画面">
+    <div class="inner">
+      <span class="tag">弾幕シューティング</span>
+      <h2>NEON STRIKE</h2>
+      <p class="desc">降りしきる敵弾をすり抜けて撃つ本格弾幕。すり抜けも得点、敵弾がひと気に得点に変わるボム、巨大ボス、シンセBGM付き。</p>
+      <p class="dev">🛠 AIチャットのClaudeが作成（約3万字）→ エージェントが回収して公開</p>
+      <a class="play" href="neon-strike.html">遊ぶ →</a>
     </div>
   </div>
 
   <div class="card">
-    <div class="game">
-      <div class="thumb">🫳</div>
-      <div>
-        <h2>ぶん投げ店長——AIに投げるか、自分で受けるか【動くゲーム】</h2>
-        <p>落ちてくる仕事を、左（AI）か右（自分）に投げ分けるアクション。赤い「全部おまかせ動画」には触らないこと。30日回せたらクリア。</p>
-        <a class="play" href="throw-game.html">遊ぶ →</a>
-        <p style="margin-top:8px;font-size:11.5px;color:#8a8f9c;font-weight:700">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
-      </div>
+    <img class="shot" src="img/throw.png" alt="ぶん投げ店長のプレイ画面">
+    <div class="inner">
+      <span class="tag">アクション</span>
+      <h2>ぶん投げ店長</h2>
+      <p class="desc">落ちてくる仕事を、左（AI）か右（自分）に投げ分ける。赤い「全部おまかせ動画」に触るとクレジットが消える。30日回せたらクリア。</p>
+      <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
+      <a class="play" href="throw-game.html">遊ぶ →</a>
     </div>
   </div>
 
   <div class="card">
-    <div class="game">
-      <div class="thumb">🚀</div>
-      <div>
-        <h2>スターシューター【動くゲーム】</h2>
-        <p>上から攻めてくる敵を撃ち落とす宇宙シューティング。倒すほどレベルが上がり、弾も3方向に。スマホは指でなぞって移動・「発射」長押し。</p>
-        <a class="play" href="shooting.html">遊ぶ →</a>
-        <p style="margin-top:8px;font-size:11.5px;color:#8a8f9c;font-weight:700">🛠 Gensparkのエージェントが作成（チャットで依頼・仕様ベースで再現）</p>
-      </div>
+    <img class="shot" src="img/shooting.png" alt="スターシューターのプレイ画面">
+    <div class="inner">
+      <span class="tag">シューティング</span>
+      <h2>スターシューター</h2>
+      <p class="desc">上から攻めてくる敵を撃ち落とす宇宙シューティング。倒すほどレベルが上がり、弾も3方向に。スマホはなぞって移動。</p>
+      <p class="dev">🛠 Gensparkのエージェントが作成（仕様ベースで再現）</p>
+      <a class="play" href="shooting.html">遊ぶ →</a>
     </div>
   </div>
 
   <div class="card">
-    <div class="game">
-      <div class="thumb">💥</div>
-      <div>
-        <h2>NEON STRIKE【動くゲーム】</h2>
-        <p>降りしきる敵弾をすり抜けて撃つ本格弾幕シューティング。すり抜けも得点（グレイズ）、敵弾がひと気に得点に変わるボム、巨大ボス、シンセBGM付き。PCは矢印/WASD＋SHIFT低速、スマホはなぞって移動（発射は自動）。</p>
-        <a class="play" href="neon-strike.html">遊ぶ →</a>
-        <p style="margin-top:8px;font-size:11.5px;color:#8a8f9c;font-weight:700">🛠 <b>AIチャットのClaudeが作成</b> → エージェントが回収して公開（約3万字）</p>
-      </div>
+    <img class="shot" src="img/balance.png" alt="おまかせバランスの画面">
+    <div class="inner">
+      <span class="tag">判断ゲーム</span>
+      <h2>おまかせバランス</h2>
+      <p class="desc">1か月ぶんの仕事10個が降ってくる。クレジット・時間・面白さの3本のゲージを切らさない判断が問われる。約2分。</p>
+      <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
+      <a class="play" href="balance-game.html">遊ぶ →</a>
     </div>
   </div>
 
-  <div class="card soon">
-    <div class="game">
-      <div class="thumb">🍢</div>
-      <div>
-        <h2>次のゲーム（考え中）</h2>
-        <p>新しいゲームができたら、ここに並びます。</p>
-        <span class="play">準備中</span>
-      </div>
+  <div class="card">
+    <img class="shot" src="img/memory.png" alt="はじめましてを卒業するゲームの画面">
+    <div class="inner">
+      <span class="tag">記憶ゲーム</span>
+      <h2>はじめまして、を卒業するゲーム</h2>
+      <p class="desc">常連さんの「いつもの」を覚える店員ゲーム。全8問・約2分。AIの「記憶」の仕組みが、遊べば分かります。</p>
+      <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
+      <a class="play" href="memory-game.html">遊ぶ →</a>
     </div>
   </div>
 
-  <div class="soon2 card">
-    <h2>🎮 ゲームを投稿したい人へ（準備中）</h2>
-    <p>AIで作ったゲームの応募フォームを、このあと追加します。応募は審査のうえ掲載します（著作権に注意：実在のキャラクター・既存ゲームの複製は載せられません）。</p>
+  <div class="dev-note">
+    <div class="t">このゲームたちの作り方</div>
+    <p>開発環境は「ブラウザとチャット」だけ。NEON STRIKEがAIチャット（Claude）製であるなど、ゲームごとの作り分けと回収の裏側を書いています。</p>
+    <a href="how-made.html">作り方を読む →</a>
   </div>
 
   <div class="cta">
     <div class="l">AIに「頼んで作った」記録は、もう一つのサイト・まかせるAI生活とnoteで公開しています。</div>
     <a href="https://gp20190917-beep.github.io/makaseru-ai-life/" target="_blank" rel="noopener">まかせるAI生活を読む →</a>
-    <div class="l" style="margin-top:14px">AIニュースを毎日まとめて読むなら、もう一つのサイト・AI WIRE。</div>
-    <a href="https://gp20190917-beep.github.io/ai-wire/" target="_blank" rel="noopener">AI WIREを読む →</a>
-  </div>
-
-  <div class="card" style="background:#101318;border-radius:18px;padding:20px 22px">
-    <div class="l" style="color:#fff;font-size:14px;font-weight:700;line-height:1.7">このゲームたちの作り方——プログラムは人間が1行も書いていない話（開発環境・NEON STRIKE回収の裏側）</div>
-    <a href="how-made.html" style="display:inline-block;margin-top:12px;background:#fff;color:#14161c;font-weight:900;font-size:14px;padding:10px 22px;border-radius:999px;text-decoration:none">作り方を読む →</a>
   </div>
 
   <p class="ftr">このサイトはGensparkの非公認ファンメディアが運営しています。Genspark社とは無関係です。<br>運営者の別サイト（まかせるAI生活・AI WIRE）へのリンクを含みます（同サイトはアフィリエイト広告を利用します）。実在の人物・店舗・キャラクターとは関係ありません。</p>
