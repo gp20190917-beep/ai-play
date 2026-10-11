@@ -4,131 +4,274 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>まかせるAI PLAY｜AIで作ったゲーム置き場（非公認ファンメディア）</title>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=DotGothic16&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#07060F; --panel:#100E22; --panel2:#151230; --line:rgba(255,255,255,.10);
+  --text:#EEEDF8; --sub:#A9A7C8;
+  --amber:#F5A623; --pink:#FF3DA6; --cyan:#22E4FF; --violet:#8E8CFF; --lime:#9BFF4A;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Zen Kaku Gothic New",sans-serif;background:#EDEEF2;color:#1A1D23;min-height:100vh;display:flex;justify-content:center;padding:20px 12px 44px;line-height:1.8}
-.app{width:100%;max-width:600px}
-.hdr{background:#1A1D23;color:#fff;border-radius:20px;padding:26px 26px 24px;margin-bottom:18px}
-.hdr .logo{font-size:32px;font-weight:900;letter-spacing:2px}
-.hdr .logo b{color:#F5A623}
-.hdr p{font-size:14.5px;color:rgba(255,255,255,.78);margin-top:8px;line-height:1.85}
-.howto{background:#fff;border-radius:18px;padding:20px 24px;margin-bottom:18px;font-size:14px}
-.howto b{color:#1A1D23}
-.howto .t{font-weight:900;font-size:16px}
-.howto p{color:#3C4150;margin-top:6px}
-.card{background:#fff;border-radius:20px;overflow:hidden;margin-bottom:20px;box-shadow:0 2px 14px rgba(20,24,40,.07)}
-.shot{width:100%;height:180px;object-fit:cover;object-position:top;display:block;background:#0a0d18}
-.inner{padding:18px 22px 20px}
-.tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.05em;color:#8a5d00;background:#FFF1D6;border-radius:999px;padding:4px 14px}
-h2{font-size:20px;font-weight:900;line-height:1.5;margin-top:10px}
-.desc{font-size:15px;color:#3C4150;line-height:1.9;margin-top:8px}
-.dev{margin-top:12px;font-size:12.5px;color:#565B6B;font-weight:700;background:#F1F2F6;border-radius:10px;padding:8px 14px;display:inline-block}
-.play{display:inline-block;margin-top:14px;background:#F5A623;color:#14161c;font-weight:900;font-size:15px;padding:12px 30px;border-radius:999px;text-decoration:none}
-.soon .shot{filter:grayscale(1) opacity(.5)}
-.soon .tag{background:#ECECEF;color:#8a8f9c}
-.soon .play{background:#ECECEF;color:#8a8f9c;pointer-events:none}
-.dev-note{background:#101318;color:#fff;border-radius:20px;padding:22px 24px;margin-bottom:20px}
-.dev-note .t{font-size:16.5px;font-weight:900;line-height:1.6}
-.dev-note p{font-size:13.5px;color:rgba(255,255,255,.72);margin-top:8px}
-.dev-note a{display:inline-block;margin-top:14px;background:#fff;color:#14161c;font-weight:900;font-size:14.5px;padding:11px 26px;border-radius:999px;text-decoration:none}
-.cta{background:#1A1D23;border-radius:20px;padding:22px 24px;margin-bottom:20px}
-.cta .l{color:#fff;font-size:14.5px;font-weight:700;line-height:1.8}
-.cta a{display:inline-block;margin-top:12px;background:#F5A623;color:#14161c;font-weight:900;font-size:14.5px;padding:11px 26px;border-radius:999px;text-decoration:none}
-.ftr{font-size:12.5px;color:#565B6B;text-align:center;line-height:2;margin-top:6px}
-.ftr a{color:#4C4AE4;font-weight:700}
+body{font-family:"Zen Kaku Gothic New",sans-serif;background:var(--bg);color:var(--text);line-height:1.85;min-height:100vh;overflow-x:hidden}
+#stars{position:fixed;inset:0;z-index:-2}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(800px 500px at 50% -10%,rgba(142,140,255,.22),transparent 65%),
+             radial-gradient(600px 400px at 100% 100%,rgba(255,61,166,.10),transparent 60%)}
+/* ブラウン管の走査線（うっすら） */
+body::after{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;
+  background:repeating-linear-gradient(to bottom,rgba(0,0,0,.14) 0 1px,transparent 1px 3px)}
+.app{max-width:1040px;margin:0 auto;padding:0 18px 50px}
+.px{font-family:"Press Start 2P",monospace}
+.dot{font-family:"DotGothic16",sans-serif}
+
+/* ===== タイトル画面 ===== */
+.hero{text-align:center;padding:72px 0 40px}
+.hero .credit{font-family:"Press Start 2P";font-size:11px;letter-spacing:.2em;color:var(--sub)}
+.logo{margin-top:22px;line-height:1.25}
+.logo .ja{display:block;font-family:"DotGothic16";font-size:clamp(30px,6vw,52px);letter-spacing:.08em;color:#fff;
+  text-shadow:0 0 12px rgba(142,140,255,.8),0 0 30px rgba(142,140,255,.4)}
+.logo .en{display:block;font-family:"Press Start 2P";font-size:clamp(44px,10vw,92px);color:var(--amber);margin-top:10px;letter-spacing:.06em;
+  text-shadow:0 0 10px rgba(245,166,35,.9),0 0 40px rgba(245,166,35,.5),6px 6px 0 #6B3F00;
+  animation:flicker 6s infinite}
+@keyframes flicker{0%,18%,22%,52%,56%,100%{opacity:1}20%,54%{opacity:.6}}
+.hero p{max-width:34em;margin:26px auto 0;color:var(--sub);font-size:16px}
+.badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px}
+.badges span{font-family:"DotGothic16";font-size:15px;padding:6px 16px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.04)}
+.badges b{color:var(--amber);font-family:"Press Start 2P";font-size:12px;margin-right:6px}
+.start{display:inline-block;margin-top:38px;font-family:"Press Start 2P";font-size:15px;color:#fff;text-decoration:none;letter-spacing:.12em;animation:blink 1.1s steps(1) infinite}
+.start:hover{color:var(--amber)}
+@keyframes blink{50%{opacity:0}}
+
+/* ===== RPG風のせつめい窓 ===== */
+.howto{position:relative;max-width:720px;margin:10px auto 46px;background:#0B0A1C;border:3px solid #fff;border-radius:10px;
+  box-shadow:0 0 0 3px #0B0A1C,0 0 0 6px rgba(255,255,255,.35);padding:20px 26px 22px}
+.howto .t{font-family:"DotGothic16";font-size:18px;color:var(--amber)}
+.howto p{margin-top:6px;font-size:16px}
+.howto strong{color:var(--cyan)}
+.howto::after{content:"▼";position:absolute;right:18px;bottom:8px;font-size:12px;animation:blink 1s steps(1) infinite}
+
+/* ===== セクション見出し ===== */
+.sec{display:flex;align-items:center;gap:14px;margin:0 0 20px;font-family:"Press Start 2P";font-size:14px;color:var(--sub);letter-spacing:.1em}
+.sec::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px)}
+.sec b{color:var(--amber)}
+
+/* ===== ゲームカード ===== */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.card{--c:var(--amber);position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s}
+.card:hover{transform:translateY(-6px);border-color:var(--c);
+  box-shadow:0 0 0 1px var(--c),0 22px 50px -18px var(--c)}
+.shotwrap{position:relative;display:block;height:200px;overflow:hidden;background:#05040c}
+.shot{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .5s}
+.card:hover .shot{transform:scale(1.07)}
+.shotwrap::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--panel) 0%,transparent 45%)}
+.ov{position:absolute;inset:0;z-index:2;display:grid;place-items:center;font-family:"Press Start 2P";font-size:16px;color:#fff;
+  background:rgba(7,6,15,.55);opacity:0;transition:opacity .25s;text-shadow:0 0 12px var(--c)}
+.card:hover .ov{opacity:1}
+.no{position:absolute;z-index:3;top:12px;left:12px;font-family:"Press Start 2P";font-size:10px;color:#fff;
+  background:rgba(0,0,0,.6);border:1px solid var(--c);padding:6px 8px;border-radius:4px}
+.new{position:absolute;z-index:3;top:12px;right:12px;font-family:"Press Start 2P";font-size:11px;color:#07060F;background:var(--c);
+  padding:7px 10px;border-radius:4px;box-shadow:0 0 18px var(--c);animation:blink 1.2s steps(1) infinite}
+.inner{padding:16px 22px 22px;display:flex;flex-direction:column;flex:1}
+.tag{align-self:flex-start;font-family:"DotGothic16";font-size:14px;color:var(--c);border:1px solid var(--c);border-radius:4px;padding:2px 12px;background:rgba(0,0,0,.25)}
+h2{font-size:22px;font-weight:900;line-height:1.45;margin-top:10px}
+.desc{font-size:15.5px;color:var(--sub);margin-top:8px;flex:1}
+.dev{margin-top:14px;font-size:13px;color:var(--sub);background:rgba(255,255,255,.04);border:1px dashed var(--line);border-radius:8px;padding:8px 12px}
+/* アーケードの押しボタン */
+.play{align-self:flex-start;margin-top:16px;display:inline-block;font-family:"DotGothic16";font-size:18px;color:#1A1000;background:var(--amber);
+  padding:10px 30px;border-radius:10px;text-decoration:none;box-shadow:0 5px 0 #9A6200,0 10px 24px rgba(245,166,35,.3);transition:transform .08s,box-shadow .08s}
+.play:hover{background:#FFBA45}
+.play:active{transform:translateY(5px);box-shadow:0 0 0 #9A6200,0 4px 10px rgba(245,166,35,.3)}
+
+/* 新作は横いっぱいに大きく */
+.featured{grid-column:1/-1;flex-direction:row}
+.featured .shotwrap{flex:1.25;height:auto;min-height:320px}
+.featured .shotwrap::after{background:linear-gradient(to left,var(--panel) 0%,transparent 35%)}
+.featured .inner{flex:1;padding:28px 30px;justify-content:center}
+.featured h2{font-family:"Press Start 2P";font-size:clamp(17px,2.2vw,24px);line-height:1.6;color:#fff;text-shadow:0 0 14px var(--c)}
+
+/* ===== 下の案内 ===== */
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px}
+.box{border-radius:16px;padding:24px 26px;border:1px solid var(--line);background:linear-gradient(150deg,var(--panel2),var(--panel))}
+.box .t{font-family:"DotGothic16";font-size:19px;color:#fff}
+.box p{font-size:14.5px;color:var(--sub);margin-top:8px}
+.box a{display:inline-block;margin-top:14px;font-weight:900;font-size:15px;text-decoration:none;padding:10px 24px;border-radius:999px;transition:.2s}
+.box.dev-note{border-color:rgba(34,228,255,.35)}
+.box.dev-note a{color:var(--cyan);border:1px solid var(--cyan)}
+.box.dev-note a:hover{background:var(--cyan);color:#07060F}
+.box.cta{border-color:rgba(245,166,35,.35)}
+.box.cta a{background:var(--amber);color:#1A1000}
+.box.cta a:hover{background:#FFBA45}
+
+.ftr{font-size:12.5px;color:var(--sub);text-align:center;line-height:2;margin-top:44px}
+.ftr .over{display:block;font-family:"Press Start 2P";font-size:11px;color:var(--amber);letter-spacing:.2em;margin-bottom:14px}
+
+@media (max-width:760px){
+  .grid,.panels{grid-template-columns:1fr}
+  .featured{flex-direction:column}
+  .featured .shotwrap{min-height:200px}
+  .featured .shotwrap::after{background:linear-gradient(to top,var(--panel) 0%,transparent 45%)}
+  .featured .inner{padding:16px 22px 22px}
+  .hero{padding-top:52px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
+<canvas id="stars" aria-hidden="true"></canvas>
 <div class="app">
-  <div class="hdr">
-    <div class="logo">まかせるAI <b>PLAY</b></div>
+
+  <header class="hero">
+    <div class="credit">CREDIT 00 ── FREE PLAY</div>
+    <h1 class="logo"><span class="ja">まかせるAI</span><span class="en">PLAY</span></h1>
     <p>AIに頼んで作ったゲームの置き場。ブラウザだけで遊べます（インストール不要・無料）。プログラムは人間が1行も書いていません。</p>
-  </div>
+    <div class="badges">
+      <span><b>06</b>GAMES</span>
+      <span><b>¥0</b>無料</span>
+      <span><b>OK</b>スマホ対応</span>
+    </div>
+    <a class="start" href="#games">PRESS START ▼</a>
+  </header>
 
   <div class="howto">
-    <span class="t">はじめての方へ</span>
-    <p>カードの<strong>「遊ぶ →」</strong>を押すだけで始まります。保存・登録・インストールは不要。スマホは<strong>指でなぞる</strong>操作です。</p>
+    <span class="t">▶ はじめての方へ</span>
+    <p>カードの<strong>「遊ぶ」</strong>ボタンか画像を押すだけで始まります。保存・登録・インストールは不要。スマホは<strong>指でなぞる</strong>操作です。</p>
   </div>
 
-  <div class="card">
-    <img class="shot" src="img/nova.png" alt="NOVAのプレイ画面">
-    <div class="inner">
-      <span class="tag">弾幕シューティング・新着</span>
-      <h2>NOVA / LAST SIGNAL</h2>
-      <p class="desc">ネオンの弾幕シューティング。3段階のボス戦と、強化をえらぶ成長要素つき。移動はなぞる／WASD、ダッシュはShift（一瞬無敵）、ボムはE。発射は自動。</p>
-      <p class="dev">🛠 AIチャットのGPT-6.1 Sol（OpenAI）が作成（2026.10.10）→ エージェントが回収して公開</p>
-      <a class="play" href="nova.html">遊ぶ →</a>
+  <div class="sec" id="games"><b>SELECT</b> GAME</div>
+
+  <div class="grid">
+
+    <article class="card featured" style="--c:#22E4FF">
+      <a class="shotwrap" href="nova.html">
+        <img class="shot" src="img/nova.png" alt="NOVAのプレイ画面">
+        <span class="no">No.06</span><span class="new">NEW!</span><span class="ov">▶ PLAY</span>
+      </a>
+      <div class="inner">
+        <span class="tag">弾幕シューティング</span>
+        <h2>NOVA /<br>LAST SIGNAL</h2>
+        <p class="desc">ネオンの弾幕シューティング。3段階のボス戦と、強化をえらぶ成長要素つき。移動はなぞる／WASD、ダッシュはShift（一瞬無敵）、ボムはE。発射は自動。</p>
+        <p class="dev">🛠 AIチャットのGPT-6.1 Sol（OpenAI）が作成（2026.10.10）→ エージェントが回収して公開</p>
+        <a class="play" href="nova.html">▶ 遊ぶ</a>
+      </div>
+    </article>
+
+    <article class="card" style="--c:#FF3DA6">
+      <a class="shotwrap" href="neon-strike.html">
+        <img class="shot" src="img/neon.png" alt="NEON STRIKEのプレイ画面" loading="lazy">
+        <span class="no">No.05</span><span class="ov">▶ PLAY</span>
+      </a>
+      <div class="inner">
+        <span class="tag">弾幕シューティング</span>
+        <h2>NEON STRIKE</h2>
+        <p class="desc">降りしきる敵弾をすり抜けて撃つ本格弾幕。すり抜けも得点、敵弾がひと気に得点に変わるボム、巨大ボス、シンセBGM付き。</p>
+        <p class="dev">🛠 AIチャットのClaude Opus 5.5が作成（約3万字）→ エージェントが回収して公開</p>
+        <a class="play" href="neon-strike.html">▶ 遊ぶ</a>
+      </div>
+    </article>
+
+    <article class="card" style="--c:#F5A623">
+      <a class="shotwrap" href="throw-game.html">
+        <img class="shot" src="img/throw.png" alt="ぶん投げ店長のプレイ画面" loading="lazy">
+        <span class="no">No.04</span><span class="ov">▶ PLAY</span>
+      </a>
+      <div class="inner">
+        <span class="tag">アクション</span>
+        <h2>ぶん投げ店長</h2>
+        <p class="desc">落ちてくる仕事を、左（AI）か右（自分）に投げ分ける。赤い「全部おまかせ動画」に触るとクレジットが消える。30日回せたらクリア。</p>
+        <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
+        <a class="play" href="throw-game.html">▶ 遊ぶ</a>
+      </div>
+    </article>
+
+    <article class="card" style="--c:#8E8CFF">
+      <a class="shotwrap" href="shooting.html">
+        <img class="shot" src="img/shooting.png" alt="スターシューターのプレイ画面" loading="lazy">
+        <span class="no">No.03</span><span class="ov">▶ PLAY</span>
+      </a>
+      <div class="inner">
+        <span class="tag">シューティング</span>
+        <h2>スターシューター</h2>
+        <p class="desc">上から攻めてくる敵を撃ち落とす宇宙シューティング。倒すほどレベルが上がり、弾も3方向に。スマホはなぞって移動。</p>
+        <p class="dev">🛠 Gensparkのエージェントが作成（仕様ベースで再現）</p>
+        <a class="play" href="shooting.html">▶ 遊ぶ</a>
+      </div>
+    </article>
+
+    <article class="card" style="--c:#9BFF4A">
+      <a class="shotwrap" href="balance-game.html">
+        <img class="shot" src="img/balance.png" alt="おまかせバランスの画面" loading="lazy">
+        <span class="no">No.02</span><span class="ov">▶ PLAY</span>
+      </a>
+      <div class="inner">
+        <span class="tag">判断ゲーム</span>
+        <h2>おまかせバランス</h2>
+        <p class="desc">1か月ぶんの仕事10個が降ってくる。クレジット・時間・面白さの3本のゲージを切らさない判断が問われる。約2分。</p>
+        <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
+        <a class="play" href="balance-game.html">▶ 遊ぶ</a>
+      </div>
+    </article>
+
+    <article class="card" style="--c:#4DD9A6">
+      <a class="shotwrap" href="memory-game.html">
+        <img class="shot" src="img/memory.png" alt="はじめましてを卒業するゲームの画面" loading="lazy">
+        <span class="no">No.01</span><span class="ov">▶ PLAY</span>
+      </a>
+      <div class="inner">
+        <span class="tag">記憶ゲーム</span>
+        <h2>はじめまして、を卒業するゲーム</h2>
+        <p class="desc">常連さんの「いつもの」を覚える店員ゲーム。全8問・約2分。AIの「記憶」の仕組みが、遊べば分かります。</p>
+        <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
+        <a class="play" href="memory-game.html">▶ 遊ぶ</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="panels">
+    <div class="box dev-note">
+      <div class="t">🕹 このゲームたちの作り方</div>
+      <p>開発環境は「ブラウザとチャット」だけ。NEON STRIKEがAIチャット（Claude）製であるなど、ゲームごとの作り分けと回収の裏側を書いています。</p>
+      <a href="how-made.html">作り方を読む →</a>
+    </div>
+    <div class="box cta">
+      <div class="t">📖 もっと読む</div>
+      <p>AIに「頼んで作った」記録は、もう一つのサイト・まかせるAI生活とnoteで公開しています。</p>
+      <a href="https://gp20190917-beep.github.io/makaseru-ai-life/" target="_blank" rel="noopener">まかせるAI生活を読む →</a>
     </div>
   </div>
 
-  <div class="card">
-    <img class="shot" src="img/neon.png" alt="NEON STRIKEのプレイ画面">
-    <div class="inner">
-      <span class="tag">弾幕シューティング</span>
-      <h2>NEON STRIKE</h2>
-      <p class="desc">降りしきる敵弾をすり抜けて撃つ本格弾幕。すり抜けも得点、敵弾がひと気に得点に変わるボム、巨大ボス、シンセBGM付き。</p>
-      <p class="dev">🛠 AIチャットのClaude Opus 5.5が作成（約3万字）→ エージェントが回収して公開</p>
-      <a class="play" href="neon-strike.html">遊ぶ →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="shot" src="img/throw.png" alt="ぶん投げ店長のプレイ画面">
-    <div class="inner">
-      <span class="tag">アクション</span>
-      <h2>ぶん投げ店長</h2>
-      <p class="desc">落ちてくる仕事を、左（AI）か右（自分）に投げ分ける。赤い「全部おまかせ動画」に触るとクレジットが消える。30日回せたらクリア。</p>
-      <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
-      <a class="play" href="throw-game.html">遊ぶ →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="shot" src="img/shooting.png" alt="スターシューターのプレイ画面">
-    <div class="inner">
-      <span class="tag">シューティング</span>
-      <h2>スターシューター</h2>
-      <p class="desc">上から攻めてくる敵を撃ち落とす宇宙シューティング。倒すほどレベルが上がり、弾も3方向に。スマホはなぞって移動。</p>
-      <p class="dev">🛠 Gensparkのエージェントが作成（仕様ベースで再現）</p>
-      <a class="play" href="shooting.html">遊ぶ →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="shot" src="img/balance.png" alt="おまかせバランスの画面">
-    <div class="inner">
-      <span class="tag">判断ゲーム</span>
-      <h2>おまかせバランス</h2>
-      <p class="desc">1か月ぶんの仕事10個が降ってくる。クレジット・時間・面白さの3本のゲージを切らさない判断が問われる。約2分。</p>
-      <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
-      <a class="play" href="balance-game.html">遊ぶ →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="shot" src="img/memory.png" alt="はじめましてを卒業するゲームの画面">
-    <div class="inner">
-      <span class="tag">記憶ゲーム</span>
-      <h2>はじめまして、を卒業するゲーム</h2>
-      <p class="desc">常連さんの「いつもの」を覚える店員ゲーム。全8問・約2分。AIの「記憶」の仕組みが、遊べば分かります。</p>
-      <p class="dev">🛠 Gensparkのエージェントが作成（チャットで依頼）</p>
-      <a class="play" href="memory-game.html">遊ぶ →</a>
-    </div>
-  </div>
-
-  <div class="dev-note">
-    <div class="t">このゲームたちの作り方</div>
-    <p>開発環境は「ブラウザとチャット」だけ。NEON STRIKEがAIチャット（Claude）製であるなど、ゲームごとの作り分けと回収の裏側を書いています。</p>
-    <a href="how-made.html">作り方を読む →</a>
-  </div>
-
-  <div class="cta">
-    <div class="l">AIに「頼んで作った」記録は、もう一つのサイト・まかせるAI生活とnoteで公開しています。</div>
-    <a href="https://gp20190917-beep.github.io/makaseru-ai-life/" target="_blank" rel="noopener">まかせるAI生活を読む →</a>
-  </div>
-
-  <p class="ftr">このサイトはGensparkの非公認ファンメディアが運営しています。Genspark社とは無関係です。<br>運営者の別サイト（まかせるAI生活・AI WIRE）へのリンクを含みます（同サイトはアフィリエイト広告を利用します）。実在の人物・店舗・キャラクターとは関係ありません。</p>
+  <p class="ftr"><span class="over">THANK YOU FOR PLAYING</span>このサイトはGensparkの非公認ファンメディアが運営しています。Genspark社とは無関係です。<br>運営者の別サイト（まかせるAI生活・AI WIRE）へのリンクを含みます（同サイトはアフィリエイト広告を利用します）。実在の人物・店舗・キャラクターとは関係ありません。</p>
 </div>
+
+<script>
+// 背景：シューティングゲームのように流れる星
+const cv = document.getElementById("stars"), ctx = cv.getContext("2d");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let W, H, dpr, stars = [];
+function init(){
+  dpr = window.devicePixelRatio || 1;
+  W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr;
+  cv.style.width = innerWidth + "px"; cv.style.height = innerHeight + "px";
+  const n = Math.min(220, Math.floor(innerWidth * innerHeight / 6000));
+  stars = Array.from({length:n}, () => ({x:Math.random()*W, y:Math.random()*H, z:Math.random()*3+.5}));
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  for(const s of stars){
+    if(!reduce){ s.y += s.z * .6 * dpr; if(s.y > H){ s.y = 0; s.x = Math.random()*W; } }
+    ctx.fillStyle = s.z > 3.2 ? "#22E4FF" : s.z > 3 ? "#FF3DA6" : "rgba(255,255,255," + (s.z/3.6) + ")";
+    const r = Math.max(1, s.z * .7 * dpr);
+    ctx.fillRect(s.x, s.y, r, reduce ? r : r * (1 + s.z * .8));
+  }
+  if(!reduce) requestAnimationFrame(draw);
+}
+addEventListener("resize", () => { init(); if(reduce) draw(); });
+init(); draw();
+</script>
 </body>
 </html>
